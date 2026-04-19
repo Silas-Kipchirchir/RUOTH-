@@ -252,7 +252,7 @@
         .footer-logo h2 { font-family: var(--serif); color: var(--gold); margin-bottom: 20px; }
         .footer-logo p { color: #888; font-size: 0.9rem; line-height: 1.8; }
         .footer-column h4 { color: var(--gold); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px; }
-        .footer-column ul { list-style: none; }
+        .footer-column ul { list-: none; }
         .footer-column ul li { margin-bottom: 15px; }
         .footer-column ul li a { color: #ccc; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
         .footer-column ul li a:hover { color: var(--gold); padding-left: 5px; }
@@ -470,7 +470,110 @@
     .wa-tooltip { display: none; } /* Hide tooltip on small screens */
 }
 
+/* ================= MOBILE FIX (ELITE) ================= */
+@media (max-width: 768px){
 
+  /* HEADER */
+  .header{
+    padding:15px 20px;
+  }
+
+  .logo{
+    width:45px;
+    height:45px;
+  }
+
+  .header h1{
+    font-size:1rem;
+  }
+
+  /* HERO */
+  .hero{
+    height:80vh;
+    padding:0 10px;
+  }
+
+  .hero-box{
+    padding:30px 20px;
+  }
+
+  .hero h2{
+    font-size:1.8rem;
+  }
+
+  .hero p{
+    font-size:0.7rem;
+    letter-spacing:2px;
+  }
+
+  /* GRID */
+  .grid{
+    padding:30px 15px;
+    gap:20px;
+  }
+
+  /* CARDS */
+  .card img{
+    height:220px;
+  }
+
+  /* HERITAGE SECTION (FIX BIG ISSUE) */
+  .heritage-container{
+    flex-direction:column;
+    gap:40px;
+    text-align:center;
+  }
+
+  .main-heritage-img{
+    width:100%;
+    max-width:100%;
+    box-shadow:none;
+  }
+
+  .heritage-content h2{
+    font-size:2rem;
+  }
+
+  .heritage-text-premium{
+    padding-left:0;
+    border:none;
+  }
+
+  /* FEATURES */
+  .features-grid-premium{
+    grid-template-columns:1fr;
+  }
+
+  /* FOOTER (BIG FIX) */
+  .footer-grid{
+    grid-template-columns:1fr;
+    gap:40px;
+    text-align:center;
+  }
+
+  .footer-bottom{
+    flex-direction:column;
+    gap:10px;
+    text-align:center;
+  }
+
+  /* CART */
+  #cart-sidebar{
+    width:100%;
+    right:-100%;
+  }
+
+  /* CATEGORY SCROLL */
+  .category-list{
+    overflow-x:auto;
+    justify-content:flex-start;
+  }
+
+}
+
+        body{
+  -webkit-font-smoothing: antialiased;
+}
 
 
 
