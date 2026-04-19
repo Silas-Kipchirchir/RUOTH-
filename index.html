@@ -161,15 +161,107 @@
         .footer-bottom { border-top: 1px solid #222; padding-top: 40px; display: flex; justify-content: space-between; font-size: 0.75rem; color: #555; }
 
         /* --- CART --- */
-        #cart-sidebar { position: fixed; right: -420px; top: 0; width: 420px; height: 100vh; background: #fff; z-index: 2000; transition: 0.5s var(--ease); padding: 40px; box-shadow: -10px 0 50px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
+        #cart-sidebar {
+    position: fixed;
+    right: -420px;
+    top: 0;
+    width: 420px;
+    height: 100vh;
+    z-index: 2000;
+
+    /* ✨ Glass luxury background */
+    background: linear-gradient(180deg, #ffffff 0%, #f7f5f0 100%);
+    backdrop-filter: blur(20px);
+
+    transition: 0.6s var(--ease);
+    padding: 30px;
+
+    box-shadow: -30px 0 80px rgba(0,0,0,0.15);
+    border-left: 1px solid rgba(184, 134, 11, 0.2);
+
+    display: flex;
+    flex-direction: column;
+
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+
+    overflow: hidden;
+}
         #cart-sidebar.active { right: 0; }
-        .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; font-family: var(--serif); }
+        .cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+
+    font-family: var(--serif);
+
+    border-bottom: 1px solid rgba(184,134,11,0.3);
+}
+
+.cart-header h2 {
+    font-size: 1.6rem;
+    color: var(--text);
+    letter-spacing: 1px;
+}
         .cart-items { flex-grow: 1; overflow-y: auto; }
-        .cart-item { display: flex; justify-content: space-between; margin-bottom: 25px; border-bottom: 1px solid #f4f4f4; padding-bottom: 15px; align-items: center; }
-        .checkout-actions { margin-top: 30px; display: flex; flex-direction: column; gap: 15px; }
-        .btn-wa, .btn-mpesa-checkout, .btn-insta { padding: 18px; border: none; border-radius: 8px; cursor: pointer; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 12px; color: #fff; text-decoration: none; }
+        .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 18px;
+    padding: 15px;
+
+    background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(184,134,11,0.1);
+    border-radius: 12px;
+
+    transition: 0.3s;
+}
+
+.cart-item:hover {
+    transform: translateX(-5px);
+    background: rgba(184,134,11,0.08);
+}
+        .checkout-actions {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+        .btn-wa, .btn-mpesa-checkout, .btn-insta {
+    padding: 16px;
+    border: none;
+    border-radius: 14px;
+
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+
+    font-size: 0.8rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    color: #fff;
+    text-decoration: none;
+
+    transition: 0.4s;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.btn-wa:hover,
+.btn-mpesa-checkout:hover,
+.btn-insta:hover {
+    transform: translateY(-3px);
+}
         .btn-wa { background: #25D366; }
-        .btn-mpesa-checkout { background: #49b04d; }
+        .btn-mpesa-checkout { background: #14d714; }
         .btn-insta { background: var(--instagram); }
         #overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 1500; display: none; backdrop-filter: blur(8px); }
 
@@ -225,6 +317,37 @@
         .mpesa-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 3000; display: none; align-items: center; justify-content: center; }
         .mpesa-box { background: white; padding: 40px; border-radius: 12px; width: 90%; max-width: 400px; text-align: center; }
         .mpesa-box input { width: 100%; padding: 15px; margin: 20px 0; border: 1px solid #ddd; font-size: 1rem; border-radius: 8px; }
+
+
+
+        .cart-header i {
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: var(--gold);
+    transition: 0.3s;
+}
+
+.cart-header i:hover {
+    transform: rotate(90deg);
+    color: #000;
+}
+
+
+.cart-total {
+    margin-top: 20px;
+    padding: 20px;
+
+    border-radius: 12px;
+    background: linear-gradient(135deg, #B8860B, #8b6508);
+
+    color: white;
+    font-weight: 600;
+    font-size: 1.4rem;
+
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(184,134,11,0.3);
+}
+
 
     </style>
 </head>
