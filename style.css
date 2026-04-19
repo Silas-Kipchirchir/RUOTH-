@@ -128,35 +128,65 @@ body {
   text-transform: uppercase;
 }
 
-.nav-links a {
-  margin-left: 40px;
-  text-decoration: none;
-  font-size: 0.8rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--text);
-  cursor: pointer;
-  transition: 0.4s;
-}
-
-.theme-toggle {
-  background: transparent;
-  border: 1px solid var(--antique-gold);
-  color: var(--antique-gold);
-  padding: 5px 15px;
-  font-size: 0.7rem;
-  margin-left: 40px;
-  border-radius: 20px;
-}
-
-.theme-toggle:hover {
-  background: var(--antique-gold);
-  color: white;
-}
-
 .nav-links a:hover {
   color: var(--antique-gold);
   opacity: 1;
+}
+
+.header-actions {
+  display: none;
+  align-items: center;
+  gap: 25px;
+}
+
+.cart-trigger-mobile {
+  position: relative;
+  cursor: pointer;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background: var(--antique-gold);
+  color: white;
+  font-size: 0.6rem;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  border: 2px solid var(--header-bg);
+}
+
+.menu-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  z-index: 2100;
+}
+
+.menu-toggle span {
+  width: 25px;
+  height: 1px;
+  background: var(--text);
+  transition: 0.4s var(--transition);
+}
+
+.close-menu {
+  display: none;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--text);
 }
 
 /* HERO SECTION */
@@ -961,31 +991,46 @@ footer {
 }
 
 @media (max-width: 768px) {
-  body { cursor: default; } /* Usually hide custom cursor on touch devices */
+  body { cursor: default; }
   .cursor { display: none; }
 
   .header { 
-    flex-direction: column; 
-    gap: 20px; 
-    padding: 20px;
-    align-items: center;
-    text-align: center;
+    padding: 15px 20px;
+    justify-content: space-between;
   }
   
+  .header h1 { font-size: 1.1rem; }
+  .logo { height: 35px; width: 35px; }
+
+  .header-actions { display: flex; }
+
   .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    height: 100vh;
+    background: var(--bg);
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    width: 100%;
+    align-items: center;
+    gap: 30px;
+    padding: 40px;
+    z-index: 2500;
+    transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: -20px 0 60px rgba(0,0,0,0.1);
   }
 
-  .nav-links a { margin-left: 0; font-size: 0.7rem; }
-  .theme-toggle { margin-left: 0; }
+  .nav-links.active { right: 0; }
+  .nav-links a { margin-left: 0; font-size: 1.2rem; }
+  .theme-toggle { margin-left: 0; font-size: 1rem; padding: 10px 25px; }
+  .close-menu { display: block; }
 
-  .hero { height: auto; min-height: 60vh; padding: 60px 20px; }
-  .hero-box { padding: 50px 30px; width: 100%; }
-  .hero h2 { font-size: 2rem; line-height: 1.2; }
+  .hero { height: 70vh; padding: 0 20px; }
+  .hero-box { padding: 40px 20px; }
+  .hero h2 { font-size: 2.2rem; }
+  .hero p { font-size: 0.8rem; letter-spacing: 2px; }
   
   .category-bar { 
     gap: 20px; 
@@ -993,34 +1038,38 @@ footer {
     overflow-x: auto; 
     justify-content: flex-start;
     -webkit-overflow-scrolling: touch;
+    border-bottom: 1px solid var(--border-color);
   }
+  .category-bar::-webkit-scrollbar { display: none; }
   .category-bar span { white-space: nowrap; font-size: 0.7rem; }
 
   .grid { 
-    padding: 20px; 
+    padding: 40px 20px; 
     grid-template-columns: 1fr; 
-    gap: 40px;
+    gap: 30px;
   }
-  .card img { height: 320px; }
+  .card img { height: 300px; }
   .card-content { padding: 30px 20px; }
+  .card-content h3 { font-size: 1.2rem; }
 
-  .heritage-section { padding: 60px 20px; }
-  .heritage-content h2 { font-size: 2rem; margin-bottom: 20px; }
-  .heritage-content p { font-size: 0.95rem; line-height: 1.8; }
+  .heritage-section { padding: 80px 20px; }
+  .heritage-content h2 { font-size: 2.2rem; margin-bottom: 20px; }
+  .heritage-content p { font-size: 1rem; line-height: 1.8; }
 
-  .pillars { padding: 40px 20px; grid-template-columns: 1fr; }
-  .pillar { padding: 20px; }
+  .pillars { padding: 40px 20px; grid-template-columns: 1fr; gap: 20px; }
+  .pillar { padding: 30px 20px; border-bottom: 1px solid var(--soft-border); }
+  .pillar:last-child { border-bottom: none; }
 
-  .newsletter { padding: 60px 20px; }
+  .newsletter { padding: 80px 20px; }
   .newsletter-box h3 { font-size: 1.8rem; }
-  .news-input { flex-direction: column; }
-  .news-input input { border-right: 1px solid var(--soft-border); border-bottom: 1px solid var(--soft-border); margin-bottom: 10px; }
-  .news-input button { width: 100%; }
+  .news-input { flex-direction: column; gap: 10px; }
+  .news-input input { border-right: 1px solid var(--soft-border); padding: 15px; border-radius: 4px; }
+  .news-input button { width: 100%; border-radius: 4px; }
 
   .grand-footer { 
     grid-template-columns: 1fr; 
     padding: 60px 20px; 
-    gap: 40px; 
+    gap: 50px; 
     text-align: center;
   }
   .footer-col { display: flex; flex-direction: column; align-items: center; }
@@ -1035,18 +1084,19 @@ footer {
 
   /* SIDEBARS */
   .cart, .admin { 
-    width: 100%; 
-    right: -100%; 
+    width: 100vw; 
+    right: -100vw; 
     padding: 60px 20px;
   }
   
   #detail-modal { padding: 15px; }
-  .modal-content { flex-direction: column; height: auto; max-height: 95vh; overflow-y: auto; }
-  .modal-img { width: 100%; height: 300px; }
+  .modal-content { flex-direction: column; height: auto; max-height: 90vh; overflow-y: auto; }
+  .modal-img { width: 100%; height: 250px; }
   .modal-info { width: 100%; padding: 30px 20px; }
-  .modal-info h2 { font-size: 2rem; }
+  .modal-info h2 { font-size: 1.8rem; }
 
-  /* LEATHER MODAL MOBILE */
   #detail-modal.custom-vibe .modal-info { padding: 40px 20px; }
-  #detail-modal.custom-vibe .modal-info h2 { font-size: 2rem; }
+  #detail-modal.custom-vibe .modal-info h2 { font-size: 1.8rem; }
+  #detail-modal.custom-vibe .modal-info::before,
+  #detail-modal.custom-vibe .modal-info::after { width: 40px; height: 40px; }
 }
