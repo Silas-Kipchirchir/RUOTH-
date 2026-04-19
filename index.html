@@ -588,33 +588,70 @@ body{
 
 .menu-btn{
   display:none;
-  font-size:1.5rem;
+  font-size:1.6rem;
   cursor:pointer;
+  color:#fff;
+  transition:0.3s;
+}
+
+/* When header becomes white (scrolled) */
+.header.scrolled .menu-btn{
+  color:var(--text);
 }
 
 @media(max-width:768px){
+
+  /* SHOW MENU BUTTON */
   .menu-btn{
     display:block;
   }
 
+  /* HIDE NORMAL NAV */
   .nav{
     position:fixed;
     top:0;
     right:-100%;
-    width:75%;
+    width:80%;
     height:100vh;
-    background:white;
+    background:rgba(255,255,255,0.96);
+    backdrop-filter:blur(20px);
     flex-direction:column;
-    padding:80px 30px;
-    gap:25px;
-    transition:0.5s;
-    box-shadow:-10px 0 40px rgba(0,0,0,0.1);
+    padding:100px 30px;
+    gap:30px;
+    transition:0.5s cubic-bezier(0.16,1,0.3,1);
+    box-shadow:-20px 0 60px rgba(0,0,0,0.15);
   }
 
   .nav.active{
     right:0;
   }
+
+  /* STYLE LINKS */
+  .nav a{
+    font-size:1rem;
+    letter-spacing:2px;
+    color:var(--text);
+  }
+
+}.close-menu{
+  position:absolute;
+  top:25px;
+  right:25px;
+  font-size:1.5rem;
+  cursor:pointer;
+  color:var(--text);
 }
+
+.nav{
+  position:relative;
+}
+
+@media(min-width:769px){
+  .close-menu{
+    display:none;
+  }
+}
+
 
     </style>
 </head>
@@ -628,6 +665,7 @@ body{
         <h1>Ruoth Luxury</h1>
     </div>
     <nav class="nav">
+        
         <a href="#">Home</a>
         <a href="#products">Shop</a>
         <a onclick="toggleCart()" id="cart-counter"> Cart (0)</a>
