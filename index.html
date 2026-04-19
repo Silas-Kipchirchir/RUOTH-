@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ruoth Luxury</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div id="loader"><img src="logo.svg" class="loader-logo"></div>
+  <div class="cursor" id="cursor"></div>
+  <div class="gold-line"></div>
+  <div id="sidebar-backdrop" onclick="closeAllSidebars()"></div>
+
+  <div class="header">
+    <div class="logo-container">
+      <img src="logo.png" alt="Ruoth Luxury" class="logo">
+      <h1>Ruoth Luxury</h1>
+    </div>
+    <div class="nav-links">
+      <a href="#products">Shop</a>
+      <a onclick="toggleCart()">Cart (<span id="count">0</span>)</a>
+      <a onclick="toggleAdmin()">Admin</a>
+      <button class="theme-toggle" onclick="toggleTheme()">Dark Mode</button>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-box">
+      <h2>Exquisite Heritage</h2>
+      <p>Handcrafted Leather Goods for the Discerning Collector</p>
+      <button class="custom-btn" onclick="openCustom()" style="margin-top:30px; background:transparent; border:1px solid var(--antique-gold); color:var(--antique-gold);">Request Custom Piece</button>
+    </div>
+  </div>
+
+  <div class="category-bar">
+    <span class="active-cat" onclick="filterProducts('All', this)">All Collections</span>
+    <span onclick="filterProducts('Wallets', this)">Wallets</span>
+    <span onclick="filterProducts('Bags', this)">Handbags</span>
+    <span onclick="filterProducts('Accessories', this)">Accessories</span>
+  </div>
+
+  <div class="grid" id="products"></div>
+
+  <!-- CART -->
+  <div class="cart" id="cart">
+    <span class="close-sidebar" onclick="toggleCart()">&times;</span>
+    <h3>Cart</h3>
+    <div id="cartItems"></div>
+    <h4>Total: KES <span id="total">0</span></h4>
+    <input id="phone" placeholder="Phone Number">
+    <button onclick="mpesaPay()">Pay M-Pesa</button>
+    <button onclick="whatsapp()">WhatsApp</button>
+  </div>
+
+  <!-- ADMIN -->
+  <div class="admin" id="admin">
+    <span class="close-sidebar" onclick="toggleAdmin()">&times;</span>
+    
+    <!-- LOGIN VIEW -->
+    <div id="admin-login" class="admin-login-container">
+      <div class="login-icon">🗝️</div>
+      <h3>Admin Access</h3>
+      <p>Enter your details to manage your products.</p>
+      <input type="email" id="admin-email" placeholder="Email Address" style="margin-bottom:15px;">
+      <input type="password" id="admin-passcode" placeholder="Password" onkeypress="if(event.key === 'Enter') loginAdmin()">
+      <button onclick="loginAdmin()">Login</button>
+    </div>
+
+
+
+    <!-- MANAGEMENT TOOLS -->
+    <div id="admin-tools" class="admin-management-tools">
+      <h3>Workshop Management</h3>
+      <input id="pname" placeholder="Item Name">
+      <input id="pprice" placeholder="Price (KES)">
+      <input id="pimg" placeholder="Imagery URL (Optional)">
+      <div class="upload-container">
+        <label for="pfile" class="custom-file-upload">Choose Masterpiece Image</label>
+        <input type="file" id="pfile" accept="image/*">
+      </div>
+      <select id="pcat"
+        style="width:100%; padding:15px; margin-bottom:30px; border:none; border-bottom:1px solid var(--soft-border); background:transparent; font-family:inherit;">
+        <option value="Wallets">Wallets</option>
+        <option value="Bags">Bags</option>
+        <option value="Accessories">Accessories</option>
+      </select>
+      <textarea id="pdesc" placeholder="Heritage Story (Description)"
+        style="width:100%; padding:15px 0; margin-bottom:30px; border:none; border-bottom:1px solid var(--soft-border); background:transparent; font-family:inherit; min-height:100px; resize:none;"></textarea>
+      <button onclick="addProduct()">Add Piece to Collection</button>
+      <div id="adminList"></div>
+    </div>
+  </div>
+
+
+  <!-- HERITAGE SECTION -->
+  <div class="heritage-section">
+    <div class="heritage-content">
+      <span class="sub-label">Est. 2026</span>
+      <h2>Our Artisanal Heritage</h2>
+      <p>Ruoth Luxury is built upon the foundation of ancestral Kenyan leather craft. Every piece in our collection is a
+        testament to the patient hands of our master artisans, who transform raw, ethically sourced calfskin into
+        timeless masterpieces of the atelier.</p>
+    </div>
+  </div>
+
+  <!-- CRAFTSMANSHIP PILLARS -->
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-icon">🏺</div>
+      <h3>Fine Tanning</h3>
+      <p>Using proprietary blend of natural oils to ensure every hide ages with a unique and royal character.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">🧵</div>
+      <h3>Hand-Stitched</h3>
+      <p>Double-saddle stitching technique passed down through generations of leather masters.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">🏛️</div>
+      <h3>Limited Archive</h3>
+      <p>We do not mass produce. Every addition to our collection is a numbered, limited-run creation.</p>
+    </div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="newsletter">
+    <div class="newsletter-box">
+      <h3>The Atelier Journal</h3>
+      <p>Join our inner circle for early access to the Archive and invitations to private viewings.</p>
+      <div class="news-input">
+        <input type="email" placeholder="Email Address">
+        <button onclick="showNotification('Welcome to the Archive')">Join</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRAND FOOTER -->
+  <div class="grand-footer">
+    <div class="footer-col">
+      <div class="logo-container">
+        <img src="logo.png" alt="Ruoth Luxury" class="logo" style="height:40px; width:40px;">
+        <h1 style="font-size:1rem;">Ruoth Luxury</h1>
+      </div>
+      <p style="margin-top:20px; font-size:0.8rem; color: #8E6D5D;">Defining the standard of modern Kenyan leather craft
+        for the discerning global collector.</p>
+    </div>
+    <div class="footer-col">
+      <h4>The Archive</h4>
+      <a href="#products">Full Collection</a>
+      <a href="#">Custom Commission</a>
+      <a href="#">The Heritage Story</a>
+      <a href="#">Sustainability Report</a>
+    </div>
+    <div class="footer-col">
+      <h4>Inquiry</h4>
+      <span>Main Atelier: Nairobi, Kenya</span>
+      <span>Global Distribution: 0725440406</span>
+      <span style="font-size: 0.8rem; margin-top: 10px;">Atelier Hours:<br>Mon - Sat: 10am - 8pm</span>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <a href="https://www.instagram.com/ruoth_luxury?igsh=NTZoaTFwbjRmcmJ0" target="_blank">Instagram</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">WhatsApp Business</a>
+      <a href="#">Contact Us</a>
+    </div>
+  </div>
+
+  <div class="copyright">
+    <span>© 2026 Ruoth Luxury Leather Craft. All rights reserved.</span>
+    <span>Crafted with Heritage in Kenya.</span>
+  </div>
+
+  <script>
+    /* LOADER */
+    window.onload = () => {
+      setTimeout(() => document.getElementById("loader").style.display = "none", 400);
+    };
+
+    /* CURSOR */
+    const cursor = document.getElementById("cursor");
+    document.addEventListener("mousemove", e => {
+      cursor.style.top = e.clientY + "px";
+      cursor.style.left = e.clientX + "px";
+    });
+
+    /* PRODUCTS */
+    let products = JSON.parse(localStorage.getItem("products")) || [
+      { id: 1, name: "Blush Peony Wallet", price: 2500, img: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&q=80&w=600&q=70", category: "Wallets", desc: "Hand-stitched from the finest blush calfskin, this piece embodies the delicate strength of the peony." },
+      { id: 2, name: "Champagne Morning Bag", price: 6500, img: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&q=80&w=600&q=70", category: "Bags", desc: "A morning essential for the sophisticated traveler, crafted in luminous champagne leather with gold-tone hardware." },
+      { id: 3, name: "Rose Petal Cardholder", price: 1800, img: "https://images.unsplash.com/photo-1566150905458-1bf1fd113962?auto=format&fit=crop&q=80&w=600&q=70", category: "Accessories", desc: "Slim, elegant, and timeless. Designed for those who appreciate the beauty of pure minimalism." },
+      { id: 4, name: "Mint Frost Tote", price: 8200, img: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=600&q=70", category: "Bags", desc: "The Mint Frost Tote offers an expansive interior and a refreshingly modern silhouette for daily elegance." },
+      { id: 5, name: "Midnight Ledger", price: 3200, img: "https://images.unsplash.com/photo-1559563206-8b652899477e?auto=format&fit=crop&q=80&w=600&q=70", category: "Wallets", desc: "Deep charcoal obsidian leather, designed for the quiet confidence of the midnight hour." },
+      { id: 6, name: "Heritage Bifold", price: 2800, img: "https://images.unsplash.com/photo-1627384113743-6bd5a479fffd?auto=format&fit=crop&q=80&w=600&q=70", category: "Wallets", desc: "A tribute to classic Kenyan tanning techniques, this bifold ages beautifully, telling your story as it goes." },
+      { id: 7, name: "Sovereign Duffel", price: 14500, img: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=600&q=70", category: "Bags", desc: "The ultimate companion for the grand voyage. Spacious, robust, and undeniably regal." },
+      { id: 8, name: "Nocturnal Clutch", price: 5400, img: "https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&q=80&w=600&q=70", category: "Bags", desc: "Sleek and mysterious. Perfectly sized for evening essentials under the city lights." },
+      { id: 9, name: "Artisan Traverse Belt", price: 3800, img: "https://images.unsplash.com/photo-1624222247344-550fb8ec5522?auto=format&fit=crop&q=80&w=600&q=70", category: "Accessories", desc: "Double-layered grain leather with a hand-polished brass buckle. A silent statement of quality." },
+      { id: 10, name: "Diplomat Passport Sleeve", price: 2200, img: "https://images.unsplash.com/photo-1544333303-5775af6bb60e?auto=format&fit=crop&q=80&w=600&q=70", category: "Accessories", desc: "Protect your heritage. A slim, refined home for your most important travel documents." },
+      { id: 11, name: "Ancestral Keychain", price: 1200, img: "https://images.unsplash.com/photo-1582234033060-9377484a9ecb?auto=format&fit=crop&q=80&w=600&q=70", category: "Accessories", desc: "Small in size, grand in detail. A tactile reminder of the craftsmanship in your pocket." }
+    ];
+
+    let currentCat = "All";
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let isAdminAuthenticated = false;
+
+    function save() {
+      localStorage.setItem("products", JSON.stringify(products));
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    function filterProducts(cat, el) {
+      currentCat = cat;
+      document.querySelectorAll('.category-bar span').forEach(s => s.classList.remove('active-cat'));
+      if (el) el.classList.add('active-cat');
+      render();
+    }
+
+    function render() {
+      let html = "";
+      let filtered = currentCat === "All" ? products : products.filter(p => p.category === currentCat);
+
+      filtered.forEach(p => {
+        html += `
+  <div class="card">
+    <img src="${p.img}" onclick="openModal(${p.id})">
+    <div class="card-content">
+      <h3>${p.name}</h3>
+      <p>KES ${p.price}</p>
+      <button onclick="addToCart(${p.id})">Selection</button>
+    </div>
+  </div>`;
+      });
+      document.getElementById("products").innerHTML = html;
+      updateCart();
+      renderAdmin();
+      reveal();
+    }
+
+    /* THEME */
+    function toggleTheme() {
+      document.body.classList.toggle("night-mode");
+      showNotification(document.body.classList.contains("night-mode") ? "Dark Mode Active" : "Light Mode Active");
+    }
+
+    /* CUSTOM COMMISSION */
+    function openCustom() {
+        document.getElementById("detail-modal").classList.add("custom-vibe");
+        document.getElementById("m-img").style.display = "none";
+        document.getElementById("m-name").innerText = "Custom Commission";
+        document.getElementById("m-desc").innerText = "Our master artisans are ready to create a unique leather masterpiece tailored to your exact desires. Please describe your vision.";
+        document.getElementById("m-cta").innerHTML = `
+            <textarea id="custom-wish" placeholder="Describe your masterpiece..." style="width:100%; padding:15px; border:1px solid var(--soft-border); background:transparent; font-family:inherit; min-height:100px; margin-bottom:20px; color:inherit;"></textarea>
+            <button onclick="whatsappCustom()">Begin Commission</button>
+        `;
+        document.getElementById("detail-modal").style.display = "flex";
+    }
+
+    function whatsappCustom() {
+        const wish = document.getElementById("custom-wish").value;
+        if(!wish) return showNotification("Please share your vision first");
+        const msg = `Atelier Inquiry: Custom Commission Request\n\nVision: ${wish}\n\nI would like to begin the custom process for a unique Ruoth Luxury piece.`;
+        const encoded = encodeURIComponent(msg);
+        showNotification("Initiating Private Commission...");
+        setTimeout(() => {
+            window.location.href = `https://api.whatsapp.com/send?phone=254725440406&text=${encoded}`;
+        }, 500);
+    }
+
+    function openModal(id) {
+      document.getElementById("detail-modal").classList.remove("custom-vibe");
+      document.getElementById("m-img").style.display = "block";
+      const p = products.find(x => x.id === id);
+      document.getElementById("m-img").src = p.img;
+      document.getElementById("m-name").innerText = p.name;
+      document.getElementById("m-desc").innerText = p.desc || "An exquisite piece of Kenyan craftsmanship, designed to last a generation.";
+      document.getElementById("m-cta").innerHTML = `<button onclick="addToCart(${p.id}); closeModal();">Add to Collection</button>`;
+      document.getElementById("detail-modal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("detail-modal").style.display = "none";
+    }
+
+    function renderAdmin() {
+      let html = "";
+      products.forEach(p => {
+        html += `
+    <div class="admin-item">
+      <div class="admin-info">
+        <img src="${p.img}" class="admin-thumb">
+        <div class="admin-details">
+            <span class="admin-name">${p.name}</span>
+            <span class="admin-price">KES ${p.price}</span>
+        </div>
+      </div>
+      <button class="delete-btn" onclick="deleteProduct(${p.id})">Archive</button>
+    </div>`;
+      });
+      document.getElementById("adminList").innerHTML = html;
+    }
+
+    function deleteProduct(id) {
+      if (confirm("Are you sure you wish to archive this piece?")) {
+        products = products.filter(p => p.id !== id);
+        save(); render();
+        showNotification("Piece Archived");
+      }
+    }
+
+    /* SCROLL REVEAL */
+    function reveal() {
+      const cards = document.querySelectorAll(".card");
+      window.addEventListener("scroll", () => {
+        cards.forEach(c => {
+          const top = c.getBoundingClientRect().top;
+          if (top < window.innerHeight - 50) {
+            c.classList.add("show");
+          }
+        });
+      });
+    }
+
+    /* CART */
+    function addToCart(id) {
+      cart.push(products.find(p => p.id === id));
+      save(); updateCart();
+      showNotification("Curated for your collection");
+    }
+
+    function showNotification(msg) {
+      const notif = document.createElement("div");
+      notif.style.cssText = `
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2D3436;
+    color: white;
+    padding: 10px 40px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    z-index: 10000;
+    font-weight: 400;
+    animation: RevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  `;
+      notif.innerText = msg;
+      document.body.appendChild(notif);
+      setTimeout(() => {
+        notif.style.transition = "0.8s";
+        notif.style.opacity = "0";
+        setTimeout(() => notif.remove(), 800);
+      }, 2500);
+    }
+
+    function updateCart() {
+      let total = 0, html = "";
+      cart.forEach((c, index) => {
+        total += c.price;
+        html += `
+  <div class="cart-item">
+    <span style="font-size:0.9rem;">${c.name}</span>
+    <span onclick="removeFromCart(${index})" class="remove-action">Remove</span>
+  </div>`;
+      });
+      document.getElementById("cartItems").innerHTML = html;
+      document.getElementById("total").innerText = total;
+      document.getElementById("count").innerText = cart.length;
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      save(); updateCart();
+      showNotification("Selection Removed");
+    }
+
+    function toggleCart() {
+      const cart = document.getElementById("cart");
+      const admin = document.getElementById("admin");
+      const backdrop = document.getElementById("sidebar-backdrop");
+
+      if (cart.classList.contains("active")) {
+        closeAllSidebars();
+      } else {
+        admin.classList.remove("active");
+        cart.classList.add("active");
+        backdrop.classList.add("active");
+      }
+    }
+
+    function loginAdmin() {
+      const emailInput = document.getElementById("admin-email");
+      const passInput = document.getElementById("admin-passcode");
+      
+      const email = emailInput.value;
+      const passcode = passInput.value;
+
+      if (email === "admin@ruothluxury.com" && passcode === "RUOTH2026") {
+        isAdminAuthenticated = true;
+        document.getElementById("admin-login").style.display = "none";
+        document.getElementById("admin-tools").classList.add("visible");
+        showNotification("Access Granted, Atelier Master");
+      } else {
+        showNotification("Invalid Credentials");
+        passInput.value = "";
+      }
+    }
+
+    function toggleAdmin() {
+      const cart = document.getElementById("cart");
+      const admin = document.getElementById("admin");
+      const backdrop = document.getElementById("sidebar-backdrop");
+
+      if (admin.classList.contains("active")) {
+        closeAllSidebars();
+      } else {
+        cart.classList.remove("active");
+        admin.classList.add("active");
+        backdrop.classList.add("active");
+        
+        if (isAdminAuthenticated) {
+          document.getElementById("admin-login").style.display = "none";
+          document.getElementById("admin-tools").classList.add("visible");
+        } else {
+          document.getElementById("admin-login").style.display = "flex";
+          document.getElementById("admin-tools").classList.remove("visible");
+          // Clear fields for fresh login attempt
+          document.getElementById("admin-email").value = "";
+          document.getElementById("admin-passcode").value = "";
+        }
+      }
+    }
+
+
+    function closeAllSidebars() {
+      document.getElementById("cart").classList.remove("active");
+      document.getElementById("admin").classList.remove("active");
+      document.getElementById("sidebar-backdrop").classList.remove("active");
+    }
+
+    /* WHATSAPP */
+    /* WHATSAPP ORDERING */
+    /* WHATSAPP ORDERING */
+    function whatsapp() {
+      if (cart.length === 0) return showNotification("Your collection is empty");
+
+      let total = 0;
+      let itemList = "";
+      cart.forEach(item => {
+        total += item.price;
+        itemList += `- ${item.name} (KES ${item.price})\n`;
+      });
+
+      const message = `*Ruoth Luxury Atelier Order*\n\n` +
+        `I would like to place an order for the following pieces:\n` +
+        `${itemList}\n` +
+        `*Grand Total: KES ${total}*\n\n` +
+        `Please advise on the next steps. Thank you.`;
+
+      const encodedMsg = encodeURIComponent(message);
+      showNotification("Connecting to Atelier...");
+
+      // Using location.href to avoid popup blockers
+      setTimeout(() => {
+        window.location.href = `https://api.whatsapp.com/send?phone=254725440406&text=${encodedMsg}`;
+      }, 500);
+    }
+
+    /* M-PESA SIM */
+    function mpesaPay() {
+      alert("M-Pesa Prompt Sent 📲");
+    }
+
+    /* ADMIN */
+    async function addProduct() {
+      let name = pname.value, price = pprice.value, img = pimg.value, cat = pcat.value, desc = pdesc.value;
+      const file = pfile.files[0];
+
+      if (!name || !price) return showNotification("Please complete all fields");
+
+      if (file) {
+        img = await new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = (e) => resolve(e.target.result);
+          reader.readAsDataURL(file);
+        });
+      }
+
+      if (!img) return showNotification("Please provide imagery or upload a file");
+
+      products.push({ id: Date.now(), name, price: Number(price), img, category: cat, desc });
+      save(); render();
+      showNotification("Piece Added to Collection");
+      pname.value = pprice.value = pimg.value = pdesc.value = pfile.value = "";
+    }
+
+    render();
+  </script>
+
+  <!-- PRODUCT MODAL -->
+  <div id="detail-modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">✕</span>
+      <img id="m-img" class="modal-img">
+      <div class="modal-info">
+        <h2 id="m-name"></h2>
+        <p id="m-desc"></p>
+        <div id="m-cta"></div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
