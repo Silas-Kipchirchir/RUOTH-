@@ -1212,3 +1212,40 @@ footer {
     font-size: 0.9rem;
   }
 }
+
+/* ================================
+   FIX: CART / MENU FADED ISSUE
+================================== */
+
+/* Make sidebars fully solid above overlay */
+.cart,
+.admin,
+.nav-links {
+  z-index: 3001 !important;
+  background: var(--bg) !important;
+  opacity: 1 !important;
+}
+
+/* Ensure backdrop stays behind panels only */
+#sidebar-backdrop {
+  z-index: 2000 !important;
+  backdrop-filter: blur(4px);
+}
+
+/* Prevent blur "bleeding illusion" */
+.cart,
+.admin,
+.nav-links {
+  backdrop-filter: none !important;
+  filter: none !important;
+}
+
+/* Strong clean surface for panels */
+.cart, .admin {
+  box-shadow: -20px 0 60px rgba(0,0,0,0.25);
+}
+
+/* Optional: reduce global fading effect */
+#sidebar-backdrop.active {
+  background: rgba(0,0,0,0.35) !important;
+}
