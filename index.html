@@ -24,10 +24,23 @@
       <img src="logo.png" alt="Ruoth Luxury" class="logo">
       <h1>Ruoth Luxury</h1>
     </div>
-    <div class="nav-links">
-      <a href="#products">Shop</a>
-      <a onclick="toggleCart()">Cart (<span id="count">0</span>)</a>
-      <a onclick="toggleAdmin()">Admin</a>
+    <div class="header-actions">
+      <div class="cart-trigger-mobile" onclick="toggleCart()">
+        <span class="cart-icon">👜</span>
+        <span id="count-mobile" class="cart-badge">0</span>
+      </div>
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <div class="nav-links" id="nav-links">
+      <span class="close-menu" onclick="toggleMenu()">&times;</span>
+      <a href="#products" onclick="toggleMenu()">Shop</a>
+      <a onclick="toggleCart(); toggleMenu();">Cart (<span id="count">0</span>)</a>
+      <a onclick="toggleAdmin(); toggleMenu();">Admin</a>
       <button class="theme-toggle" onclick="toggleTheme()">Dark Mode</button>
     </div>
   </div>
@@ -374,6 +387,17 @@
       document.getElementById("cartItems").innerHTML = html;
       document.getElementById("total").innerText = total;
       document.getElementById("count").innerText = cart.length;
+      document.getElementById("count-mobile").innerText = cart.length;
+    }
+
+    function toggleMenu() {
+      document.getElementById("nav-links").classList.toggle("active");
+      document.getElementById("sidebar-backdrop").classList.toggle("active");
+    }
+
+    function closeMenu() {
+      document.getElementById("nav-links").classList.remove("active");
+      document.getElementById("sidebar-backdrop").classList.remove("active");
     }
 
     function removeFromCart(index) {
@@ -443,6 +467,7 @@
     function closeAllSidebars() {
       document.getElementById("cart").classList.remove("active");
       document.getElementById("admin").classList.remove("active");
+      document.getElementById("nav-links").classList.remove("active");
       document.getElementById("sidebar-backdrop").classList.remove("active");
     }
 
