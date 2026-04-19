@@ -26,7 +26,7 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        body { font-family: var(--sans); background: var(--bg); color: var(--text); overflow-x: hidden; }
+        body { font-family: var(--sans); background: var(--bg); color: var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
         /* --- HEADER --- */
         .header {
@@ -49,14 +49,14 @@
         }
 
         .logo-container { display: flex; align-items: center; gap: 15px; }
-        .logo { width: 65px; height: 65px; border-radius: 50%; object-fit: cover;transition: 0.4s var(--ease); }
+        .logo { width: 65px; height: 65px; border-radius: 50%; object-fit: cover; transition: 0.4s var(--ease); }
         .header h1 { font-family: var(--serif); font-size: 1.4rem; color: #fff; transition: 0.5s; letter-spacing: 1px; }
         .header.scrolled h1 { color: var(--gold); }
 
         .nav { display: flex; gap: 30px; align-items: center; }
         .nav a { 
             text-decoration: none; font-size: 0.75rem; letter-spacing: 2px; 
-            color: #fff; opacity: 1; transition: 0.4s; cursor: pointer; text-transform: uppercase;
+            color: #fff; transition: 0.4s; cursor: pointer; text-transform: uppercase;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         .header.scrolled .nav a { color: var(--text); text-shadow: none; }
@@ -69,6 +69,9 @@
         }
         .header.scrolled .nav-call-btn { border-color: var(--gold); }
 
+        .menu-btn { display: none; font-size: 1.6rem; cursor: pointer; color: #fff; transition: 0.3s; }
+        .header.scrolled .menu-btn { color: var(--text); }
+
         /* --- HERO --- */
         .hero {
             height: 100vh;
@@ -76,6 +79,7 @@
             align-items: center;
             justify-content: center;
             background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=1600') center/cover;
+            padding: 0 20px;
         }
 
         .hero-box {
@@ -84,52 +88,37 @@
             text-align: center;
             box-shadow: var(--shadow);
             backdrop-filter: blur(10px);
-            max-width: 90%;
+            max-width: 800px;
+            width: 100%;
         }
 
         .hero h2 { font-family: var(--serif); font-size: 3.5rem; margin-bottom: 15px; }
-        .hero p { text-transform: uppercase; letter-spacing: 5px; color: var(--muted); font-size: 0.8rem; }
+        .hero p { text-transform: uppercase; letter-spacing: 5px; color: var(--muted); font-size: 0.8rem; margin-bottom: 10px; }
 
         /* --- PRODUCTS --- */
         .grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Changed min from 320px to 250px */
-    gap: 30px; 
-    padding: 60px 8%; 
-}
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px; 
+            padding: 60px 8%; 
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
         .card { background: #fff; transition: 0.5s var(--ease); text-align: center; padding-bottom: 30px; border-radius: 4px; overflow: hidden; }
         .card:hover { transform: translateY(-10px); box-shadow: var(--shadow); }
-        /* Smaller, more elegant product images */
-.card img { 
-    width: 100%; 
-    height: 280px; /* Reduced from 420px to make them smaller */
-    object-fit: cover; /* Ensures the image fills the area without stretching */
-    background-color: #fcfcfc; /* Adds a subtle background for transparent images */
-    transition: transform 0.5s var(--ease);
-}
-
-/* Optional: Slight zoom on hover for a premium feel */
-.card:hover img {
-    transform: scale(1.05);
-}
-        .card h3 { font-family: var(--serif); margin: 25px 0 5px; }
+        .card img { width: 100%; height: 320px; object-fit: cover; transition: transform 0.5s var(--ease); }
+        .card:hover img { transform: scale(1.05); }
+        .card h3 { font-family: var(--serif); margin: 25px 0 5px; padding: 0 15px; }
         .card p { color: var(--gold); margin-bottom: 20px; font-weight: 500; }
 
         .btn-add {
             background: var(--text); color: #fff; padding: 14px 30px; border: none;
             letter-spacing: 2px; font-size: 0.75rem; cursor: pointer; transition: 0.3s;
-            text-transform: uppercase;
-        }
-        
-        
-
-        /* --- ENHANCED HERITAGE & FEATURES --- */
-        .heritage-wrapper {
-            background: #fff;
-            padding: 120px 0;
-            overflow: hidden;
+            text-transform: uppercase; border-radius: 4px;
         }
 
+        /* --- HERITAGE --- */
+        .heritage-wrapper { background: #fff; padding: 120px 0; overflow: hidden; }
         .heritage-container {
             display: flex;
             align-items: center;
@@ -138,113 +127,27 @@
             margin: 0 auto;
             padding: 0 5%;
         }
-
-        .heritage-image-stack {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-
+        .heritage-image-stack { flex: 1; display: flex; justify-content: center; }
         .main-heritage-img {
-            width: 85%;          /* reduce size */
-            max-width: 500px;   /* prevent it from getting too big */
-            height: 480px;      /* slightly smaller height */
+            width: 100%;
+            max-width: 500px;
+            height: 480px;
             object-fit: cover;
             border-radius: 4px;
             box-shadow: 30px 30px 0px var(--bg);
-            z-index: 2;
         }
+        .heritage-content { flex: 1; }
+        .heritage-content span { color: var(--gold); letter-spacing: 6px; font-weight: 500; font-size: 0.75rem; display: block; margin-bottom: 20px; }
+        .heritage-content h2 { font-family: var(--serif); font-size: 3.5rem; line-height: 1.1; margin-bottom: 35px; color: var(--text); }
+        .heritage-text-premium { font-size: 1.1rem; line-height: 2; color: var(--muted); border-left: 3px solid var(--gold); padding-left: 35px; }
 
-
-        .heritage-content {
-            flex: 1;
-            max-width: 520px;   /* keeps text from stretching too wide */
-        }
-
-
-        .heritage-content span {
-            color: var(--gold);
-            letter-spacing: 6px;
-            font-weight: 500;
-            font-size: 0.75rem;
-            display: block;
-            margin-bottom: 20px;
-        }
-
-        .heritage-content h2 {
-            font-family: var(--serif);
-            font-size: 3.5rem;
-            line-height: 1.1;
-            margin-bottom: 35px;
-            color: var(--text);
-        }
-
-        .heritage-text-premium {
-            font-size: 1.1rem;
-            line-height: 2;
-            color: var(--muted);
-            border-left: 3px solid var(--gold);
-            padding-left: 35px;
-        }
-
-        .features-section-dark {
-            background: var(--footer-bg); 
-            padding: 120px 8%;
-            color: #fff;
-        }
-
-        .features-grid-premium {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 60px 45px;
-            border: 1px solid rgba(184, 134, 11, 0.15);
-            transition: 0.6s var(--ease);
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-            border-radius: 4px;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-15px);
-            border-color: var(--gold);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .feature-card i {
-            font-size: 3rem;
-            margin-bottom: 30px;
-            display: block;
-            filter: drop-shadow(0 0 10px rgba(184, 134, 11, 0.3));
-        }
-
-        .feature-card h4 {
-            font-family: var(--serif);
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--gold);
-            letter-spacing: 1px;
-        }
-
-        .feature-card p {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: #bbb;
-        }
-
-        /* --- JOURNAL SIGNUP --- */
-        .journal-section { padding: 80px 10%; background: var(--bg); text-align: center; border-top: 1px solid #eee; }
-        .journal-section h3 { font-family: var(--serif); font-size: 2rem; margin-bottom: 15px; }
-        .journal-section p { color: var(--muted); margin-bottom: 30px; }
-        .signup-form { display: flex; max-width: 500px; margin: 0 auto; gap: 10px; }
-        .signup-form input { flex: 1; padding: 15px 20px; border: 1px solid #ddd; outline: none; border-radius: 4px; }
+        /* --- FEATURES --- */
+        .features-section-dark { background: var(--footer-bg); padding: 120px 8%; color: #fff; }
+        .features-grid-premium { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .feature-card { background: rgba(255, 255, 255, 0.03); padding: 60px 45px; border: 1px solid rgba(184, 134, 11, 0.15); transition: 0.6s var(--ease); text-align: center; border-radius: 4px; }
+        .feature-card i { font-size: 3rem; margin-bottom: 30px; display: block; }
+        .feature-card h4 { font-family: var(--serif); font-size: 1.8rem; margin-bottom: 20px; color: var(--gold); }
+        .feature-card p { font-size: 1rem; line-height: 1.8; color: #bbb; }
 
         /* --- FOOTER --- */
         footer { background: var(--footer-bg); color: #fff; padding: 100px 10% 40px; }
@@ -255,432 +158,100 @@
         .footer-column ul { list-style: none; }
         .footer-column ul li { margin-bottom: 15px; }
         .footer-column ul li a { color: #ccc; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
-        .footer-column ul li a:hover { color: var(--gold); padding-left: 5px; }
         .footer-bottom { border-top: 1px solid #222; padding-top: 40px; display: flex; justify-content: space-between; font-size: 0.75rem; color: #555; }
 
-        /* --- CART SIDEBAR --- */
+        /* --- CART --- */
         #cart-sidebar { position: fixed; right: -420px; top: 0; width: 420px; height: 100vh; background: #fff; z-index: 2000; transition: 0.5s var(--ease); padding: 40px; box-shadow: -10px 0 50px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
         #cart-sidebar.active { right: 0; }
         .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; font-family: var(--serif); }
         .cart-items { flex-grow: 1; overflow-y: auto; }
-        .cart-item { display: flex; justify-content: space-between; margin-bottom: 25px; border-bottom: 1px solid #f4f4f4; padding-bottom: 15px; }
-        .cart-total { margin-top: 20px; border-top: 1px solid #eee; padding-top: 25px; font-weight: 600; font-size: 1.5rem; font-family: var(--serif); text-align: right; }
-        
+        .cart-item { display: flex; justify-content: space-between; margin-bottom: 25px; border-bottom: 1px solid #f4f4f4; padding-bottom: 15px; align-items: center; }
         .checkout-actions { margin-top: 30px; display: flex; flex-direction: column; gap: 15px; }
-        .btn-wa { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; padding: 18px; border: none; display: flex; align-items: center; justify-content: center; gap: 12px; cursor: pointer; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.85rem; border-radius: 8px; }
-        .btn-mpesa-checkout { background: linear-gradient(135deg, #49b04d 0%, #358d38 100%); color: white; padding: 18px; border: none; display: flex; align-items: center; justify-content: center; gap: 12px; cursor: pointer; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.85rem; border-radius: 8px; }
-   .btn-mpesa-checkout img { 
-    height: 26px;
-    filter: brightness(0) invert(1); /* makes it white */
-}
-        .btn-insta { background: var(--instagram); color: white; padding: 18px; border: none; display: flex; align-items: center; justify-content: center; gap: 12px; cursor: pointer; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.85rem; border-radius: 8px; text-decoration: none; }
+        .btn-wa, .btn-mpesa-checkout, .btn-insta { padding: 18px; border: none; border-radius: 8px; cursor: pointer; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 12px; color: #fff; text-decoration: none; }
+        .btn-wa { background: #25D366; }
+        .btn-mpesa-checkout { background: #49b04d; }
+        .btn-insta { background: var(--instagram); }
+        #overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 1500; display: none; backdrop-filter: blur(8px); }
 
+        /* --- CATEGORY NAV --- */
+        .category-nav { padding: 60px 0 20px; text-align: center; }
+        .category-list { display: flex; justify-content: center; gap: 40px; max-width: 800px; margin: 0 auto; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 15px; }
+        .cat-btn { background: none; border: none; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); cursor: pointer; transition: 0.3s; position: relative; padding-bottom: 10px; }
+        .cat-btn.active { color: var(--text); font-weight: 600; }
+        .cat-btn.active::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: var(--gold); }
+
+        /* --- MOBILE WHATSAPP --- */
+        .whatsapp-float { position: fixed; bottom: 40px; right: 40px; width: 60px; height: 60px; background: #25D366; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 5000; box-shadow: 0 10px 25px rgba(0,0,0,0.2); text-decoration: none; transition: 0.3s; }
+
+        /* ================= MOBILE RESPONSIVE FIXES ================= */
+        @media (max-width: 968px) {
+            .header { padding: 20px 30px; }
+            .header.scrolled { padding: 15px 30px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .menu-btn { display: block; }
+            .nav {
+                position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
+                background: #fff; flex-direction: column; padding: 100px 40px;
+                transition: 0.5s var(--ease); box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+            }
+            .nav.active { right: 0; }
+            .nav a { color: var(--text); font-size: 1.1rem; text-shadow: none; }
+            .header.scrolled .nav a { color: var(--text); }
+            
+            .hero-box { padding: 40px 20px; }
+            .hero h2 { font-size: 2.2rem; }
+            
+            .heritage-container { flex-direction: column; text-align: center; gap: 40px; }
+            .main-heritage-img { height: auto; box-shadow: 15px 15px 0px var(--bg); }
+            .heritage-text-premium { border-left: none; padding-left: 0; }
+            .heritage-content h2 { font-size: 2.5rem; }
+
+            .category-list { gap: 20px; overflow-x: auto; padding: 0 20px 15px; justify-content: flex-start; }
+            .cat-btn { white-space: nowrap; font-size: 0.75rem; }
+
+            .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
+            
+            #cart-sidebar { width: 100%; right: -100%; }
+            .grid { padding: 40px 20px; }
+            .whatsapp-float { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 25px; }
+        }
+
+        .close-menu { position: absolute; top: 25px; right: 25px; font-size: 1.5rem; cursor: pointer; color: var(--text); }
+        
         .mpesa-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 3000; display: none; align-items: center; justify-content: center; }
         .mpesa-box { background: white; padding: 40px; border-radius: 12px; width: 90%; max-width: 400px; text-align: center; }
         .mpesa-box input { width: 100%; padding: 15px; margin: 20px 0; border: 1px solid #ddd; font-size: 1rem; border-radius: 8px; }
-        #overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 1500; display: none; backdrop-filter: blur(8px); }
-
-        @media(max-width: 968px) {
-            .header { padding: 20px 25px; }
-            @media(max-width: 968px){
-  .nav a{
-    display:none;
-  }
-
-  /* KEEP ONLY THESE VISIBLE */
-  .nav a[href="#products"],
-  #cart-counter,
-  .nav-call-btn{
-    display:inline-block;
-  }
-} 
-           .heritage-container {
-            display: flex;
-            align-items: center;   /* THIS is key */
-            gap: 80px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 5%;
-        }
-
-            .heritage-content { text-align: center; }
-            .heritage-text-premium { border-left: none; padding-left: 0; }
-        .main-heritage-img {
-            width: 85%;
-            max-width: 500px;
-            height: auto;              /* remove fixed height */
-            object-fit: cover;
-            border-radius: 4px;
-            box-shadow: 30px 30px 0px var(--bg);
-        }
-
-            #cart-sidebar { width: 100%; right: -100%; }
-        }
-
-    /* --- CATEGORY NAVIGATION STYLES --- */
-.category-nav {
-    padding: 60px 0 20px;
-    text-align: center;
-    background: var(--bg);
-}
-
-.category-list {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    padding-bottom: 15px;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.cat-btn {
-    background: none;
-    border: none;
-    font-family: var(--sans);
-    font-size: 0.85rem;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--muted);
-    cursor: pointer;
-    transition: 0.4s var(--ease);
-    position: relative;
-    padding-bottom: 10px;
-}
-
-.cat-btn:hover {
-    color: var(--gold);
-}
-
-.cat-btn.active {
-    color: var(--text);
-    font-weight: 500;
-}
-
-/* The animated gold underline for the active category */
-.cat-btn.active::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--gold);
-}
-
-@media(max-width: 768px) {
-    .category-list {
-        gap: 20px;
-        padding: 0 20px 15px;
-        overflow-x: auto; /* Allows swiping on mobile */
-        justify-content: flex-start;
-    }
-    .cat-btn { font-size: 0.75rem; white-space: nowrap; }
-}
-
-
-/* --- HERO ANIMATIONS --- */
-
-.hero-box {
-    opacity: 0;
-    transform: translateY(40px);
-    animation: fadeUp 1.2s var(--ease) forwards;
-    animation-delay: 0.3s;
-}
-
-/* Heading animation */
-.hero h2 {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 1s var(--ease) forwards;
-    animation-delay: 0.6s;
-}
-
-/* Subtitle animation */
-.hero p {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 1s var(--ease) forwards;
-    animation-delay: 0.9s;
-}
-
-/* Button animation */
-.hero .btn-add {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 1s var(--ease) forwards;
-    animation-delay: 1.2s;
-}
-
-/* Keyframes */
-@keyframes fadeUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* --- FLOATING WHATSAPP BUTTON --- */
-.whatsapp-float {
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
-    width: 60px;
-    height: 60px;
-    background-color: #25D366;
-    color: #FFF;
-    border-radius: 50px;
-    text-align: center;
-    font-size: 30px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    z-index: 5000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    transition: 0.3s var(--ease);
-}
-
-.whatsapp-float:hover {
-    transform: scale(1.1);
-    background-color: #128C7E;
-    color: #fff;
-}
-
-/* Tooltip that appears on hover */
-.wa-tooltip {
-    position: absolute;
-    right: 75px;
-    background: #333;
-    color: #fff;
-    padding: 8px 15px;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    white-space: nowrap;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.3s;
-}
-
-.whatsapp-float:hover .wa-tooltip {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Mobile adjustments */
-@media (max-width: 768px) {
-    .whatsapp-float {
-        bottom: 20px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
-        font-size: 25px;
-    }
-    .wa-tooltip { display: none; } /* Hide tooltip on small screens */
-}
-
-/* ================= MOBILE FIX (ELITE) ================= */
-@media (max-width: 768px){
-
-  /* HEADER */
-  .header{
-    padding:15px 20px;
-  }
-
-  .logo{
-    width:45px;
-    height:45px;
-  }
-
-  .header h1{
-    font-size:1rem;
-  }
-
-  /* HERO */
-  .hero{
-    height:80vh;
-    padding:0 10px;
-  }
-
-  .hero-box{
-    padding:30px 20px;
-  }
-
-  .hero h2{
-    font-size:1.8rem;
-  }
-
-  .hero p{
-    font-size:0.7rem;
-    letter-spacing:2px;
-  }
-
-  /* GRID */
-  .grid{
-    padding:30px 15px;
-    gap:20px;
-  }
-
-  /* CARDS */
-  .card img{
-    height:220px;
-  }
-
-  /* HERITAGE SECTION (FIX BIG ISSUE) */
-  .heritage-container{
-    flex-direction:column;
-    gap:40px;
-    text-align:center;
-  }
-
-  .main-heritage-img{
-    width:100%;
-    max-width:100%;
-    box-shadow:none;
-  }
-
-  .heritage-content h2{
-    font-size:2rem;
-  }
-
-  .heritage-text-premium{
-    padding-left:0;
-    border:none;
-  }
-
-  /* FEATURES */
-  .features-grid-premium{
-    grid-template-columns:1fr;
-  }
-
-  /* FOOTER (BIG FIX) */
-  .footer-grid{
-    grid-template-columns:1fr;
-    gap:40px;
-    text-align:center;
-  }
-
-  .footer-bottom{
-    flex-direction:column;
-    gap:10px;
-    text-align:center;
-  }
-
-  /* CART */
-  #cart-sidebar{
-    width:100%;
-    right:-100%;
-  }
-
-  /* CATEGORY SCROLL */
-  .category-list{
-    overflow-x:auto;
-    justify-content:flex-start;
-  }
-
-}
-
-body{
-  -webkit-font-smoothing: antialiased;
-}
-
-.menu-btn{
-  display:none;
-  font-size:1.6rem;
-  cursor:pointer;
-  color:#fff;
-  transition:0.3s;
-}
-
-/* When header becomes white (scrolled) */
-.header.scrolled .menu-btn{
-  color:var(--text);
-}
-
-@media(max-width:768px){
-
-  /* SHOW MENU BUTTON */
-  .menu-btn{
-    display:block;
-  }
-
-  /* HIDE NORMAL NAV */
-  .nav{
-    position:fixed;
-    top:0;
-    right:-100%;
-    width:80%;
-    height:100vh;
-    background:rgba(255,255,255,0.96);
-    backdrop-filter:blur(20px);
-    flex-direction:column;
-    padding:100px 30px;
-    gap:30px;
-    transition:0.5s cubic-bezier(0.16,1,0.3,1);
-    box-shadow:-20px 0 60px rgba(0,0,0,0.15);
-  }
-
-  .nav.active{
-    right:0;
-  }
-
-  /* STYLE LINKS */
-  .nav a{
-    font-size:1rem;
-    letter-spacing:2px;
-    color:var(--text);
-  }
-
-}.close-menu{
-  position:absolute;
-  top:25px;
-  right:25px;
-  font-size:1.5rem;
-  cursor:pointer;
-  color:var(--text);
-}
-
-.nav{
-  position:relative;
-}
-
-@media(min-width:769px){
-  .close-menu{
-    display:none;
-  }
-}
-
 
     </style>
 </head>
 <body>
 
-<div id="overlay" onclick="toggleCart()"></div>
+<div id="overlay" onclick="closeAll()"></div>
 
 <header class="header" id="header">
     <div class="logo-container">
         <img src="logo.png" class="logo" alt="Ruoth">
         <h1>Ruoth Luxury</h1>
     </div>
-    <nav class="nav">
-        
-        <a href="#">Home</a>
-        <a href="#products">Shop</a>
-        <a onclick="toggleCart()" id="cart-counter"> Cart (0)</a>
+    <nav class="nav" id="mainNav">
+        <span class="close-menu" onclick="toggleMenu()">&times;</span>
+        <a href="#" onclick="toggleMenu()">Home</a>
+        <a href="#products" onclick="toggleMenu()">Shop</a>
+        <a onclick="openCart()">Cart <span id="cart-count-nav">(0)</span></a>
         <a href="tel:0719568205" class="nav-call-btn">Call Us</a>
     </nav>
-
-        <div class="menu-btn" onclick="toggleMenu()">☰</div>
-
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
 </header>
 
 <section class="hero">
     <div class="hero-box">
         <p>Heritage Handcrafted Leather</p>
         <h2>Classic Heritage</h2>
-        <button class="btn-add" onclick="document.getElementById('products').scrollIntoView()">Discover More</button>
+        <button class="btn-add" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">Discover More</button>
     </div>
 </section>
 
@@ -693,26 +264,20 @@ body{
     </div>
 </section>
 
-
-
 <div class="grid" id="products"></div>
 
 <section class="heritage-wrapper">
     <div class="heritage-container">
-        
         <div class="heritage-image-stack">
-            <img src="craftman.png" class="main-heritage-img" alt="Master Craftsman working leather">
-            
-            </div>
-        
+            <img src="craftman.png" class="main-heritage-img" alt="Master Craftsman">
+        </div>
         <div class="heritage-content">
-            <span class="atelier-label">THE ATELIER STORY</span>
+            <span>THE ATELIER STORY</span>
             <h2>Our Artisanal Heritage</h2>
             <p class="heritage-text-premium">
                 Ruoth Luxury is built upon the foundation of ancestral Kenyan leather craft. Every piece in our collection is a testament to the patient hands of our master artisans, who transform raw, ethically sourced calfskin into timeless masterpieces of the atelier.
             </p>
         </div>
-        
     </div>
 </section>
 
@@ -721,27 +286,18 @@ body{
         <div class="feature-card">
             <i>🏺</i>
             <h4>Fine Tanning</h4>
-            <p>Using a proprietary blend of natural oils to ensure every hide ages with a unique and royal character that deepens over time.</p>
+            <p>Using a proprietary blend of natural oils to ensure every hide ages with a unique and royal character.</p>
         </div>
         <div class="feature-card">
             <i>🧵</i>
             <h4>Hand-Stitched</h4>
-            <p>Double-saddle stitching techniques passed down through generations, ensuring structural integrity and a lifetime of use.</p>
+            <p>Double-saddle stitching techniques ensuring structural integrity and a lifetime of use.</p>
         </div>
         <div class="feature-card">
             <i>🏛️</i>
             <h4>Limited Archive</h4>
-            <p>We reject mass production. Every addition to our collection is a numbered, small-batch creation for the discerning collector.</p>
+            <p>Every addition to our collection is a numbered, small-batch creation for the discerning collector.</p>
         </div>
-    </div>
-</section>
-
-<section class="journal-section">
-    <h3>The Design Journal</h3>
-    <p>Join our inner circle for early access to the Archive and invitations to private viewings.</p>
-    <div class="signup-form">
-        <input type="email" placeholder="Enter your email address">
-        <button class="btn-add">Join</button>
     </div>
 </section>
 
@@ -757,53 +313,40 @@ body{
                 <li><a href="#">Full Collection</a></li>
                 <li><a href="#">Custom Commission</a></li>
                 <li><a href="#">The Heritage Story</a></li>
-                <li><a href="#">Sustainability Report</a></li>
             </ul>
         </div>
         <div class="footer-column">
             <h4>Inquiry</h4>
             <ul>
-                <li><a href="#">Main Atelier: Nairobi, Kenya</a></li>
-                <li><a href="tel:0725440406">Distribution: 0725440406</a></li>
-                <li><a href="#">Mon - Sat: 10am - 8pm</a></li>
+                <li><a href="#">Nairobi, Kenya</a></li>
+                <li><a href="tel:0725440406">0725440406</a></li>
             </ul>
         </div>
         <div class="footer-column">
             <h4>Connect</h4>
             <ul>
-                <li><a href="https://www.instagram.com/ruoth_luxury?igsh=NTZoaTFwbjRmcmJ0" target="_blank">Instagram</a></li>
-                <li><a href="#">LinkedIn</a></li>
-                <li><a href="#">WhatsApp Business</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li><a href="https://www.instagram.com/ruoth_luxury" target="_blank">Instagram</a></li>
+                <li><a href="#">WhatsApp</a></li>
             </ul>
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2026 Ruoth Luxury Leather Craft. All rights reserved.</p>
-        <p>Crafted with Heritage in Kenya.</p>
+        <p>&copy; 2026 Ruoth Luxury Leather Craft.</p>
+        <p>Crafted in Kenya.</p>
     </div>
 </footer>
 
-
-
-
-
-
-
 <div id="cart-sidebar">
     <div class="cart-header">
-        <h2>Your Cart</h2>
-        <i class="fas fa-times" style="cursor:pointer;" onclick="toggleCart()"></i>
+        <h2>Your Bag</h2>
+        <i class="fas fa-times" style="cursor:pointer;" onclick="closeCart()"></i>
     </div>
     <div class="cart-items" id="cart-list"></div>
     <div class="cart-total" id="cart-total">Total: KES 0</div>
     <div class="checkout-actions">
-        <button class="btn-wa" onclick="checkoutWA()"><i class="fab fa-whatsapp"></i> Checkout on WhatsApp</button>
-        <button class="btn-mpesa-checkout" onclick="toggleMpesa(true)">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/M-PESA_LOGO-01.svg" alt="M-Pesa">
-    Checkout via M-Pesa
-</button>
-        <a href="https://www.instagram.com/ruoth_luxury?igsh=NTZoaTFwbjRmcmJ0" target="_blank" class="btn-insta"><i class="fab fa-instagram"></i> Checkout on Instagram</a>
+        <button class="btn-wa" onclick="checkoutWA()"><i class="fab fa-whatsapp"></i> WhatsApp Checkout</button>
+        <button class="btn-mpesa-checkout" onclick="toggleMpesa(true)">M-Pesa Checkout</button>
+        <a href="https://www.instagram.com/ruoth_luxury" target="_blank" class="btn-insta"><i class="fab fa-instagram"></i> Instagram DM</a>
     </div>
 </div>
 
@@ -816,232 +359,105 @@ body{
     </div>
 </div>
 
+<a href="https://wa.me/254719568205" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
 <script>
-
-    // 1. UPDATED: Expanded product list with categories
-
     const products = [
-
-        // WALLETS
-
         { id: 1, name: "Signature Billfold", price: 2500, category: "wallets", img: "https://images.unsplash.com/photo-1627123424574-724758594e93" },
-
         { id: 2, name: "Slim Card Sleeve", price: 1500, category: "wallets", img: "https://images.unsplash.com/photo-1559251643-c909e7445778?auto=format&fit=crop&w=800" },
-
         { id: 3, name: "The Royal Clutch", price: 4200, category: "wallets", img: "https://images.unsplash.com/photo-1594223503110-38890259f81f?auto=format&fit=crop&w=800" },
-
-        
-
-        // HANDBAGS
-
         { id: 4, name: "Atelier Tote", price: 6500, category: "handbags", img: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7" },
-
         { id: 5, name: "Heritage Duffle", price: 8200, category: "handbags", img: "https://images.unsplash.com/photo-1544816155-12df9643f363" },
-
         { id: 6, name: "Executive Briefcase", price: 12500, category: "handbags", img: "https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=800" },
-
-
-
-        // ACCESSORIES
-
         { id: 7, name: "Classic Leather Belt", price: 2800, category: "accessories", img: "https://images.unsplash.com/photo-1624222247344-550fb8ec5521?auto=format&fit=crop&w=800" },
-
         { id: 8, name: "Artisanal Key Ring", price: 950, category: "accessories", img: "https://images.unsplash.com/photo-1594913366249-184203ef3e1d?auto=format&fit=crop&w=800" },
-
         { id: 9, name: "Luxury Watch Roll", price: 5500, category: "accessories", img: "https://images.unsplash.com/photo-1585123334904-845d60e97b29?auto=format&fit=crop&w=800" }
-
     ];
-
-
 
     let cart = [];
 
-
-
-    // 2. ADDED: Filter Functionality
+    function renderProducts(items = products) {
+        const grid = document.getElementById('products');
+        grid.innerHTML = items.map(p => `
+            <div class="card">
+                <img src="${p.img}">
+                <h3>${p.name}</h3>
+                <p>KES ${p.price.toLocaleString()}</p>
+                <button class="btn-add" onclick="addToCart(${p.id})">Add to Collection</button>
+            </div>
+        `).join('');
+    }
 
     function filterProducts(category, element) {
-
-        // Update active button styling
-
         document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
-
         element.classList.add('active');
-
-
-
         const grid = document.getElementById('products');
-
-        
-
-        // Filter logic
-
-        const filtered = category === 'all' 
-
-            ? products 
-
-            : products.filter(p => p.category === category);
-
-
-
-        // Smooth transition effect
-
         grid.style.opacity = '0';
-
         setTimeout(() => {
-
-            grid.innerHTML = filtered.map(p => `
-
-                <div class="card">
-
-                    <img src="${p.img}">
-
-                    <h3 style="padding-top: 15px;">${p.name}</h3>
-
-                    <p>KES ${p.price.toLocaleString()}</p>
-
-                    <button class="btn-add" onclick="addToCart(${p.id})">Add to Collection</button>
-
-                </div>
-
-            `).join('');
-
+            const filtered = category === 'all' ? products : products.filter(p => p.category === category);
+            renderProducts(filtered);
             grid.style.opacity = '1';
-
         }, 300);
-
     }
-
-
-
-    function renderProducts() {
-
-        document.getElementById('products').innerHTML = products.map(p => `
-
-            <div class="card">
-
-                <img src="${p.img}">
-
-                <h3 style="padding-top: 15px;">${p.name}</h3>
-
-                <p>KES ${p.price.toLocaleString()}</p>
-
-                <button class="btn-add" onclick="addToCart(${p.id})">Add to Collection</button>
-
-            </div>
-
-        `).join('');
-
-    }
-
-
 
     function addToCart(id) {
-
         const item = products.find(p => p.id === id);
-
         cart.push(item);
-
         updateCartUI();
-
         const btn = event.target;
-
         btn.innerText = "Added!";
-
-        btn.style.background = "var(--gold)";
-
-        setTimeout(() => { btn.innerText = "Add to Collection"; btn.style.background = "var(--text)"; }, 800);
-
+        setTimeout(() => btn.innerText = "Add to Collection", 1000);
     }
-
-
 
     function updateCartUI() {
-
         const list = document.getElementById('cart-list');
-
-        const counter = document.getElementById('cart-counter');
-
+        const countNav = document.getElementById('cart-count-nav');
         const totalEl = document.getElementById('cart-total');
-
-        counter.innerText = `Bag (${cart.length})`;
-
+        countNav.innerText = `(${cart.length})`;
         list.innerHTML = cart.map((item, index) => `
-
             <div class="cart-item">
-
                 <div><strong>${item.name}</strong><br><small>KES ${item.price.toLocaleString()}</small></div>
-
                 <i class="fas fa-trash-alt" onclick="removeItem(${index})" style="color:#cc0000; cursor:pointer;"></i>
-
             </div>
-
         `).join('');
-
         const total = cart.reduce((sum, item) => sum + item.price, 0);
-
         totalEl.innerText = `Total: KES ${total.toLocaleString()}`;
-
     }
-
-
 
     function removeItem(index) { cart.splice(index, 1); updateCartUI(); }
-
     
-
-    function toggleCart() {
-
-        const sidebar = document.getElementById('cart-sidebar');
-
-        sidebar.classList.toggle('active');
-
-        document.getElementById('overlay').style.display = sidebar.classList.contains('active') ? 'block' : 'none';
-
+    function openCart() {
+        document.getElementById('cart-sidebar').classList.add('active');
+        document.getElementById('overlay').style.display = 'block';
+        if(window.innerWidth <= 768) toggleMenu(); // Close mobile menu if open
     }
 
+    function closeCart() {
+        document.getElementById('cart-sidebar').classList.remove('active');
+        document.getElementById('overlay').style.display = 'none';
+    }
 
+    function closeAll() { closeCart(); if(window.innerWidth <= 768) document.getElementById('mainNav').classList.remove('active'); }
+
+    function toggleMenu() { document.getElementById('mainNav').classList.toggle('active'); }
 
     function toggleMpesa(show) { document.getElementById('mpesaModal').style.display = show ? 'flex' : 'none'; }
-
     function processMpesa() { alert("STK Push sent!"); toggleMpesa(false); }
 
-    
-
     function checkoutWA() {
-
         const total = cart.reduce((sum, item) => sum + item.price, 0);
-
         let msg = `Hello Ruoth Luxury, I'd like to order:\n` + cart.map(i => `- ${i.name}`).join('\n') + `\nTotal: KES ${total}`;
-
         window.open(`https://wa.me/254719568205?text=${encodeURIComponent(msg)}`);
-
     }
 
-
-
     window.addEventListener("scroll", () => {
-
         document.getElementById("header").classList.toggle("scrolled", window.scrollY > 50);
-
     });
 
-
-
     renderProducts();
-
-function toggleMenu(){
-  document.querySelector(".nav").classList.toggle("active");
-}
-    
 </script>
-
-<a href="https://wa.me/254719568205?text=Hello%20Ruoth%20Luxury%2C%20I%20have%20an%20inquiry%20regarding..." 
-   class="whatsapp-float" 
-   target="_blank">
-    <i class="fab fa-whatsapp"></i>
-    <span class="wa-tooltip">Chat with an Artisan</span>
-</a>
 
 </body>
 </html>
