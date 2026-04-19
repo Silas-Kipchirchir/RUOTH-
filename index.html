@@ -1,548 +1,862 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ruoth Luxury</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruoth Luxury | Handcrafted Excellence</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --gold: #B8860B;
+            --bg: #F9F7F2;
+            --text: #1C1C1C;
+            --muted: #8E6D5D;
+            --glass: rgba(255, 255, 255, 0.9);
+            --shadow: 0 25px 60px rgba(0,0,0,0.1);
+            --serif: 'Playfair Display', serif;
+            --sans: 'Poppins', sans-serif;
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
+            --whatsapp: #25D366;
+            --footer-bg: #111111;
+            --instagram: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+        }
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins&display=swap"
-    rel="stylesheet">
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--sans); background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-  <link rel="stylesheet" href="style.css">
+        /* --- HEADER --- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 60px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: 0.6s var(--ease);
+        }
+
+        .header.scrolled {
+            padding: 15px 60px;
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .logo-container { display: flex; align-items: center; gap: 15px; }
+        .logo { width: 65px; height: 65px; border-radius: 50%; object-fit: cover;transition: 0.4s var(--ease); }
+        .header h1 { font-family: var(--serif); font-size: 1.4rem; color: #fff; transition: 0.5s; letter-spacing: 1px; }
+        .header.scrolled h1 { color: var(--gold); }
+
+        .nav { display: flex; gap: 30px; align-items: center; }
+        .nav a { 
+            text-decoration: none; font-size: 0.75rem; letter-spacing: 2px; 
+            color: #fff; opacity: 1; transition: 0.4s; cursor: pointer; text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .header.scrolled .nav a { color: var(--text); text-shadow: none; }
+        .nav a:hover { color: var(--gold) !important; }
+
+        .nav-call-btn {
+            border: 1px solid #fff;
+            padding: 8px 18px;
+            border-radius: 40px;
+        }
+        .header.scrolled .nav-call-btn { border-color: var(--gold); }
+
+        /* --- HERO --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=1600') center/cover;
+        }
+
+        .hero-box {
+            background: rgba(255,255,255,0.98);
+            padding: 60px 80px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            max-width: 90%;
+        }
+
+        .hero h2 { font-family: var(--serif); font-size: 3.5rem; margin-bottom: 15px; }
+        .hero p { text-transform: uppercase; letter-spacing: 5px; color: var(--muted); font-size: 0.8rem; }
+
+        /* --- PRODUCTS --- */
+        .grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Changed min from 320px to 250px */
+    gap: 30px; 
+    padding: 60px 8%; 
+}
+        .card { background: #fff; transition: 0.5s var(--ease); text-align: center; padding-bottom: 30px; border-radius: 4px; overflow: hidden; }
+        .card:hover { transform: translateY(-10px); box-shadow: var(--shadow); }
+        /* Smaller, more elegant product images */
+.card img { 
+    width: 100%; 
+    height: 280px; /* Reduced from 420px to make them smaller */
+    object-fit: cover; /* Ensures the image fills the area without stretching */
+    background-color: #fcfcfc; /* Adds a subtle background for transparent images */
+    transition: transform 0.5s var(--ease);
+}
+
+/* Optional: Slight zoom on hover for a premium feel */
+.card:hover img {
+    transform: scale(1.05);
+}
+        .card h3 { font-family: var(--serif); margin: 25px 0 5px; }
+        .card p { color: var(--gold); margin-bottom: 20px; font-weight: 500; }
+
+        .btn-add {
+            background: var(--text); color: #fff; padding: 14px 30px; border: none;
+            letter-spacing: 2px; font-size: 0.75rem; cursor: pointer; transition: 0.3s;
+            text-transform: uppercase;
+        }
+        
+        
+
+        /* --- ENHANCED HERITAGE & FEATURES --- */
+        .heritage-wrapper {
+            background: #fff;
+            padding: 120px 0;
+            overflow: hidden;
+        }
+
+        .heritage-container {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .heritage-image-stack {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .main-heritage-img {
+            width: 85%;          /* reduce size */
+            max-width: 500px;   /* prevent it from getting too big */
+            height: 480px;      /* slightly smaller height */
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 30px 30px 0px var(--bg);
+            z-index: 2;
+        }
+
+
+        .heritage-content {
+            flex: 1;
+            max-width: 520px;   /* keeps text from stretching too wide */
+        }
+
+
+        .heritage-content span {
+            color: var(--gold);
+            letter-spacing: 6px;
+            font-weight: 500;
+            font-size: 0.75rem;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .heritage-content h2 {
+            font-family: var(--serif);
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 35px;
+            color: var(--text);
+        }
+
+        .heritage-text-premium {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: var(--muted);
+            border-left: 3px solid var(--gold);
+            padding-left: 35px;
+        }
+
+        .features-section-dark {
+            background: var(--footer-bg); 
+            padding: 120px 8%;
+            color: #fff;
+        }
+
+        .features-grid-premium {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 60px 45px;
+            border: 1px solid rgba(184, 134, 11, 0.15);
+            transition: 0.6s var(--ease);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            display: block;
+            filter: drop-shadow(0 0 10px rgba(184, 134, 11, 0.3));
+        }
+
+        .feature-card h4 {
+            font-family: var(--serif);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--gold);
+            letter-spacing: 1px;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #bbb;
+        }
+
+        /* --- JOURNAL SIGNUP --- */
+        .journal-section { padding: 80px 10%; background: var(--bg); text-align: center; border-top: 1px solid #eee; }
+        .journal-section h3 { font-family: var(--serif); font-size: 2rem; margin-bottom: 15px; }
+        .journal-section p { color: var(--muted); margin-bottom: 30px; }
+        .signup-form { display: flex; max-width: 500px; margin: 0 auto; gap: 10px; }
+        .signup-form input { flex: 1; padding: 15px 20px; border: 1px solid #ddd; outline: none; border-radius: 4px; }
+
+        /* --- FOOTER --- */
+        footer { background: var(--footer-bg); color: #fff; padding: 100px 10% 40px; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 80px; }
+        .footer-logo h2 { font-family: var(--serif); color: var(--gold); margin-bottom: 20px; }
+        .footer-logo p { color: #888; font-size: 0.9rem; line-height: 1.8; }
+        .footer-column h4 { color: var(--gold); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px; }
+        .footer-column ul { list-style: none; }
+        .footer-column ul li { margin-bottom: 15px; }
+        .footer-column ul li a { color: #ccc; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+        .footer-column ul li a:hover { color: var(--gold); padding-left: 5px; }
+        .footer-bottom { border-top: 1px solid #222; padding-top: 40px; display: flex; justify-content: space-between; font-size: 0.75rem; color: #555; }
+
+        /* --- CART SIDEBAR --- */
+        #cart-sidebar { position: fixed; right: -420px; top: 0; width: 420px; height: 100vh; background: #fff; z-index: 2000; transition: 0.5s var(--ease); padding: 40px; box-shadow: -10px 0 50px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
+        #cart-sidebar.active { right: 0; }
+        .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; font-family: var(--serif); }
+        .cart-items { flex-grow: 1; overflow-y: auto; }
+        .cart-item { display: flex; justify-content: space-between; margin-bottom: 25px; border-bottom: 1px solid #f4f4f4; padding-bottom: 15px; }
+        .cart-total { margin-top: 20px; border-top: 1px solid #eee; padding-top: 25px; font-weight: 600; font-size: 1.5rem; font-family: var(--serif); text-align: right; }
+        
+        .checkout-actions { margin-top: 30px; display: flex; flex-direction: column; gap: 15px; }
+        .btn-wa { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; padding: 18px; border: none; display: flex; align-items: center; justify-content: center; gap: 12px; cursor: pointer; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.85rem; border-radius: 8px; }
+        .btn-mpesa-checkout { background: linear-gradient(135deg, #49b04d 0%, #358d38 100%); color: white; padding: 18px; border: none; display: flex; align-items: center; justify-content: center; gap: 12px; cursor: pointer; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.85rem; border-radius: 8px; }
+   .btn-mpesa-checkout img { 
+    height: 26px;
+    filter: brightness(0) invert(1); /* makes it white */
+}
+        .btn-insta { background: var(--instagram); color: white; padding: 18px; border: none; display: flex; align-items: center; justify-content: center; gap: 12px; cursor: pointer; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.85rem; border-radius: 8px; text-decoration: none; }
+
+        .mpesa-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 3000; display: none; align-items: center; justify-content: center; }
+        .mpesa-box { background: white; padding: 40px; border-radius: 12px; width: 90%; max-width: 400px; text-align: center; }
+        .mpesa-box input { width: 100%; padding: 15px; margin: 20px 0; border: 1px solid #ddd; font-size: 1rem; border-radius: 8px; }
+        #overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 1500; display: none; backdrop-filter: blur(8px); }
+
+        @media(max-width: 968px) {
+            .header { padding: 20px 25px; }
+            .nav a:not(#cart-counter):not(.nav-call-btn) { display: none; } 
+           .heritage-container {
+            display: flex;
+            align-items: center;   /* THIS is key */
+            gap: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+            .heritage-content { text-align: center; }
+            .heritage-text-premium { border-left: none; padding-left: 0; }
+        .main-heritage-img {
+            width: 85%;
+            max-width: 500px;
+            height: auto;              /* remove fixed height */
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 30px 30px 0px var(--bg);
+        }
+
+            #cart-sidebar { width: 100%; right: -100%; }
+        }
+
+    /* --- CATEGORY NAVIGATION STYLES --- */
+.category-nav {
+    padding: 60px 0 20px;
+    text-align: center;
+    background: var(--bg);
+}
+
+.category-list {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding-bottom: 15px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cat-btn {
+    background: none;
+    border: none;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    transition: 0.4s var(--ease);
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.cat-btn:hover {
+    color: var(--gold);
+}
+
+.cat-btn.active {
+    color: var(--text);
+    font-weight: 500;
+}
+
+/* The animated gold underline for the active category */
+.cat-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--gold);
+}
+
+@media(max-width: 768px) {
+    .category-list {
+        gap: 20px;
+        padding: 0 20px 15px;
+        overflow-x: auto; /* Allows swiping on mobile */
+        justify-content: flex-start;
+    }
+    .cat-btn { font-size: 0.75rem; white-space: nowrap; }
+}
+
+
+/* --- HERO ANIMATIONS --- */
+
+.hero-box {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeUp 1.2s var(--ease) forwards;
+    animation-delay: 0.3s;
+}
+
+/* Heading animation */
+.hero h2 {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1s var(--ease) forwards;
+    animation-delay: 0.6s;
+}
+
+/* Subtitle animation */
+.hero p {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1s var(--ease) forwards;
+    animation-delay: 0.9s;
+}
+
+/* Button animation */
+.hero .btn-add {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1s var(--ease) forwards;
+    animation-delay: 1.2s;
+}
+
+/* Keyframes */
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- FLOATING WHATSAPP BUTTON --- */
+.whatsapp-float {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 60px;
+    height: 60px;
+    background-color: #25D366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    z-index: 5000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: 0.3s var(--ease);
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    background-color: #128C7E;
+    color: #fff;
+}
+
+/* Tooltip that appears on hover */
+.wa-tooltip {
+    position: absolute;
+    right: 75px;
+    background: #333;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+}
+
+.whatsapp-float:hover .wa-tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+    }
+    .wa-tooltip { display: none; } /* Hide tooltip on small screens */
+}
+
+
+
+
+
+    </style>
 </head>
-
 <body>
 
-  <div id="loader"><img src="logo.svg" class="loader-logo"></div>
-  <div class="cursor" id="cursor"></div>
-  <div class="gold-line"></div>
-  <div id="sidebar-backdrop" onclick="closeAllSidebars()"></div>
+<div id="overlay" onclick="toggleCart()"></div>
 
-  <div class="header">
+<header class="header" id="header">
     <div class="logo-container">
-      <img src="logo.png" alt="Ruoth Luxury" class="logo">
-      <h1>Ruoth Luxury</h1>
+        <img src="logo.png" class="logo" alt="Ruoth">
+        <h1>Ruoth Luxury</h1>
     </div>
-    <div class="header-actions">
-      <div class="cart-trigger-mobile" onclick="toggleCart()">
-        <span class="cart-icon">👜</span>
-        <span id="count-mobile" class="cart-badge">0</span>
-      </div>
-      <div class="menu-toggle" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
+    <nav class="nav">
+        <a href="#">Home</a>
+        <a href="#products">Shop</a>
+        <a onclick="toggleCart()" id="cart-counter"> Cart (0)</a>
+        <a href="tel:0719568205" class="nav-call-btn">Call Us</a>
+    </nav>
+</header>
 
-    <div class="nav-links" id="nav-links">
-      <span class="close-menu" onclick="toggleMenu()">&times;</span>
-      <a href="#products" onclick="toggleMenu()">Shop</a>
-      <a onclick="toggleCart(); toggleMenu();">Cart (<span id="count">0</span>)</a>
-      <a onclick="toggleAdmin(); toggleMenu();">Admin</a>
-      <button class="theme-toggle" onclick="toggleTheme()">Dark Mode</button>
-    </div>
-  </div>
-
-  <div class="hero">
+<section class="hero">
     <div class="hero-box">
-      <h2>Exquisite Heritage</h2>
-      <p>Handcrafted Leather Goods for the Discerning Collector</p>
-      <button class="custom-btn" onclick="openCustom()" style="margin-top:30px; background:transparent; border:1px solid var(--antique-gold); color:var(--antique-gold);">Request Custom Piece</button>
+        <p>Heritage Handcrafted Leather</p>
+        <h2>Classic Heritage</h2>
+        <button class="btn-add" onclick="document.getElementById('products').scrollIntoView()">Discover More</button>
     </div>
-  </div>
+</section>
 
-  <div class="category-bar">
-    <span class="active-cat" onclick="filterProducts('All', this)">All Collections</span>
-    <span onclick="filterProducts('Wallets', this)">Wallets</span>
-    <span onclick="filterProducts('Bags', this)">Handbags</span>
-    <span onclick="filterProducts('Accessories', this)">Accessories</span>
-  </div>
-
-  <div class="grid" id="products"></div>
-
-  <!-- CART -->
-  <div class="cart" id="cart">
-    <span class="close-sidebar" onclick="toggleCart()">&times;</span>
-    <h3>Cart</h3>
-    <div id="cartItems"></div>
-    <h4>Total: KES <span id="total">0</span></h4>
-    <input id="phone" placeholder="Phone Number">
-    <button onclick="mpesaPay()">Pay M-Pesa</button>
-    <button onclick="whatsapp()">WhatsApp</button>
-  </div>
-
-  <!-- ADMIN -->
-  <div class="admin" id="admin">
-    <span class="close-sidebar" onclick="toggleAdmin()">&times;</span>
-    
-    <!-- LOGIN VIEW -->
-    <div id="admin-login" class="admin-login-container">
-      <div class="login-icon">🗝️</div>
-      <h3>Admin Access</h3>
-      <p>Enter your details to manage your products.</p>
-      <input type="email" id="admin-email" placeholder="Email Address" style="margin-bottom:15px;">
-      <input type="password" id="admin-passcode" placeholder="Password" onkeypress="if(event.key === 'Enter') loginAdmin()">
-      <button onclick="loginAdmin()">Login</button>
+<section class="category-nav">
+    <div class="category-list">
+        <button class="cat-btn active" onclick="filterProducts('all', this)">All Collections</button>
+        <button class="cat-btn" onclick="filterProducts('wallets', this)">Wallets</button>
+        <button class="cat-btn" onclick="filterProducts('handbags', this)">Handbags</button>
+        <button class="cat-btn" onclick="filterProducts('accessories', this)">Accessories</button>
     </div>
+</section>
 
 
 
-    <!-- MANAGEMENT TOOLS -->
-    <div id="admin-tools" class="admin-management-tools">
-      <h3>Workshop Management</h3>
-      <input id="pname" placeholder="Item Name">
-      <input id="pprice" placeholder="Price (KES)">
-      <input id="pimg" placeholder="Imagery URL (Optional)">
-      <div class="upload-container">
-        <label for="pfile" class="custom-file-upload">Choose Masterpiece Image</label>
-        <input type="file" id="pfile" accept="image/*">
-      </div>
-      <select id="pcat"
-        style="width:100%; padding:15px; margin-bottom:30px; border:none; border-bottom:1px solid var(--soft-border); background:transparent; font-family:inherit;">
-        <option value="Wallets">Wallets</option>
-        <option value="Bags">Bags</option>
-        <option value="Accessories">Accessories</option>
-      </select>
-      <textarea id="pdesc" placeholder="Heritage Story (Description)"
-        style="width:100%; padding:15px 0; margin-bottom:30px; border:none; border-bottom:1px solid var(--soft-border); background:transparent; font-family:inherit; min-height:100px; resize:none;"></textarea>
-      <button onclick="addProduct()">Add Piece to Collection</button>
-      <div id="adminList"></div>
+<div class="grid" id="products"></div>
+
+<section class="heritage-wrapper">
+    <div class="heritage-container">
+        
+        <div class="heritage-image-stack">
+            <img src="craftman.png" class="main-heritage-img" alt="Master Craftsman working leather">
+            
+            </div>
+        
+        <div class="heritage-content">
+            <span class="atelier-label">THE ATELIER STORY</span>
+            <h2>Our Artisanal Heritage</h2>
+            <p class="heritage-text-premium">
+                Ruoth Luxury is built upon the foundation of ancestral Kenyan leather craft. Every piece in our collection is a testament to the patient hands of our master artisans, who transform raw, ethically sourced calfskin into timeless masterpieces of the atelier.
+            </p>
+        </div>
+        
     </div>
-  </div>
+</section>
+
+<section class="features-section-dark">
+    <div class="features-grid-premium">
+        <div class="feature-card">
+            <i>🏺</i>
+            <h4>Fine Tanning</h4>
+            <p>Using a proprietary blend of natural oils to ensure every hide ages with a unique and royal character that deepens over time.</p>
+        </div>
+        <div class="feature-card">
+            <i>🧵</i>
+            <h4>Hand-Stitched</h4>
+            <p>Double-saddle stitching techniques passed down through generations, ensuring structural integrity and a lifetime of use.</p>
+        </div>
+        <div class="feature-card">
+            <i>🏛️</i>
+            <h4>Limited Archive</h4>
+            <p>We reject mass production. Every addition to our collection is a numbered, small-batch creation for the discerning collector.</p>
+        </div>
+    </div>
+</section>
+
+<section class="journal-section">
+    <h3>The Design Journal</h3>
+    <p>Join our inner circle for early access to the Archive and invitations to private viewings.</p>
+    <div class="signup-form">
+        <input type="email" placeholder="Enter your email address">
+        <button class="btn-add">Join</button>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-logo">
+            <h2>Ruoth Luxury</h2>
+            <p>Defining the standard of modern Kenyan leather craft for the discerning global collector.</p>
+        </div>
+        <div class="footer-column">
+            <h4>The Archive</h4>
+            <ul>
+                <li><a href="#">Full Collection</a></li>
+                <li><a href="#">Custom Commission</a></li>
+                <li><a href="#">The Heritage Story</a></li>
+                <li><a href="#">Sustainability Report</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Inquiry</h4>
+            <ul>
+                <li><a href="#">Main Atelier: Nairobi, Kenya</a></li>
+                <li><a href="tel:0725440406">Distribution: 0725440406</a></li>
+                <li><a href="#">Mon - Sat: 10am - 8pm</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Connect</h4>
+            <ul>
+                <li><a href="https://www.instagram.com/ruoth_luxury?igsh=NTZoaTFwbjRmcmJ0" target="_blank">Instagram</a></li>
+                <li><a href="#">LinkedIn</a></li>
+                <li><a href="#">WhatsApp Business</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Ruoth Luxury Leather Craft. All rights reserved.</p>
+        <p>Crafted with Heritage in Kenya.</p>
+    </div>
+</footer>
 
 
-  <!-- HERITAGE SECTION -->
-  <div class="heritage-section">
-    <div class="heritage-content">
-      <span class="sub-label">Est. 2026</span>
-      <h2>Our Artisanal Heritage</h2>
-      <p>Ruoth Luxury is built upon the foundation of ancestral Kenyan leather craft. Every piece in our collection is a
-        testament to the patient hands of our master artisans, who transform raw, ethically sourced calfskin into
-        timeless masterpieces of the atelier.</p>
-    </div>
-  </div>
 
-  <!-- CRAFTSMANSHIP PILLARS -->
-  <div class="pillars">
-    <div class="pillar">
-      <div class="pillar-icon">🏺</div>
-      <h3>Fine Tanning</h3>
-      <p>Using proprietary blend of natural oils to ensure every hide ages with a unique and royal character.</p>
-    </div>
-    <div class="pillar">
-      <div class="pillar-icon">🧵</div>
-      <h3>Hand-Stitched</h3>
-      <p>Double-saddle stitching technique passed down through generations of leather masters.</p>
-    </div>
-    <div class="pillar">
-      <div class="pillar-icon">🏛️</div>
-      <h3>Limited Archive</h3>
-      <p>We do not mass produce. Every addition to our collection is a numbered, limited-run creation.</p>
-    </div>
-  </div>
 
-  <!-- NEWSLETTER -->
-  <div class="newsletter">
-    <div class="newsletter-box">
-      <h3>The Atelier Journal</h3>
-      <p>Join our inner circle for early access to the Archive and invitations to private viewings.</p>
-      <div class="news-input">
-        <input type="email" placeholder="Email Address">
-        <button onclick="showNotification('Welcome to the Archive')">Join</button>
-      </div>
-    </div>
-  </div>
 
-  <!-- GRAND FOOTER -->
-  <div class="grand-footer">
-    <div class="footer-col">
-      <div class="logo-container">
-        <img src="logo.png" alt="Ruoth Luxury" class="logo" style="height:40px; width:40px;">
-        <h1 style="font-size:1rem;">Ruoth Luxury</h1>
-      </div>
-      <p style="margin-top:20px; font-size:0.8rem; color: #8E6D5D;">Defining the standard of modern Kenyan leather craft
-        for the discerning global collector.</p>
-    </div>
-    <div class="footer-col">
-      <h4>The Archive</h4>
-      <a href="#products">Full Collection</a>
-      <a href="#">Custom Commission</a>
-      <a href="#">The Heritage Story</a>
-      <a href="#">Sustainability Report</a>
-    </div>
-    <div class="footer-col">
-      <h4>Inquiry</h4>
-      <span>Main Atelier: Nairobi, Kenya</span>
-      <span>Global Distribution: 0725440406</span>
-      <span style="font-size: 0.8rem; margin-top: 10px;">Atelier Hours:<br>Mon - Sat: 10am - 8pm</span>
-    </div>
-    <div class="footer-col">
-      <h4>Connect</h4>
-      <a href="https://www.instagram.com/ruoth_luxury?igsh=NTZoaTFwbjRmcmJ0" target="_blank">Instagram</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">WhatsApp Business</a>
-      <a href="#">Contact Us</a>
-    </div>
-  </div>
 
-  <div class="copyright">
-    <span>© 2026 Ruoth Luxury Leather Craft. All rights reserved.</span>
-    <span>Crafted with Heritage in Kenya.</span>
-  </div>
 
-  <script>
-    /* LOADER */
-    window.onload = () => {
-      setTimeout(() => document.getElementById("loader").style.display = "none", 400);
-    };
+<div id="cart-sidebar">
+    <div class="cart-header">
+        <h2>Your Cart</h2>
+        <i class="fas fa-times" style="cursor:pointer;" onclick="toggleCart()"></i>
+    </div>
+    <div class="cart-items" id="cart-list"></div>
+    <div class="cart-total" id="cart-total">Total: KES 0</div>
+    <div class="checkout-actions">
+        <button class="btn-wa" onclick="checkoutWA()"><i class="fab fa-whatsapp"></i> Checkout on WhatsApp</button>
+        <button class="btn-mpesa-checkout" onclick="toggleMpesa(true)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/M-PESA_LOGO-01.svg" alt="M-Pesa">
+    Checkout via M-Pesa
+</button>
+        <a href="https://www.instagram.com/ruoth_luxury?igsh=NTZoaTFwbjRmcmJ0" target="_blank" class="btn-insta"><i class="fab fa-instagram"></i> Checkout on Instagram</a>
+    </div>
+</div>
 
-    /* CURSOR */
-    const cursor = document.getElementById("cursor");
-    document.addEventListener("mousemove", e => {
-      cursor.style.top = e.clientY + "px";
-      cursor.style.left = e.clientX + "px";
-    });
+<div class="mpesa-modal" id="mpesaModal">
+    <div class="mpesa-box">
+        <h3>M-Pesa Express</h3>
+        <input type="text" id="mpesaPhone" placeholder="07XX XXX XXX">
+        <button class="btn-mpesa-checkout" style="width: 100%" onclick="processMpesa()">Pay Now</button>
+        <p style="margin-top: 15px; cursor: pointer; color: var(--muted)" onclick="toggleMpesa(false)">Cancel</p>
+    </div>
+</div>
 
-    /* PRODUCTS */
-    let products = JSON.parse(localStorage.getItem("products")) || [
-      { id: 1, name: "Blush Peony Wallet", price: 2500, img: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&q=80&w=600&q=70", category: "Wallets", desc: "Hand-stitched from the finest blush calfskin, this piece embodies the delicate strength of the peony." },
-      { id: 2, name: "Champagne Morning Bag", price: 6500, img: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&q=80&w=600&q=70", category: "Bags", desc: "A morning essential for the sophisticated traveler, crafted in luminous champagne leather with gold-tone hardware." },
-      { id: 3, name: "Rose Petal Cardholder", price: 1800, img: "https://images.unsplash.com/photo-1566150905458-1bf1fd113962?auto=format&fit=crop&q=80&w=600&q=70", category: "Accessories", desc: "Slim, elegant, and timeless. Designed for those who appreciate the beauty of pure minimalism." },
-      { id: 4, name: "Mint Frost Tote", price: 8200, img: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=600&q=70", category: "Bags", desc: "The Mint Frost Tote offers an expansive interior and a refreshingly modern silhouette for daily elegance." },
-      { id: 5, name: "Midnight Ledger", price: 3200, img: "https://images.unsplash.com/photo-1559563206-8b652899477e?auto=format&fit=crop&q=80&w=600&q=70", category: "Wallets", desc: "Deep charcoal obsidian leather, designed for the quiet confidence of the midnight hour." },
-      { id: 6, name: "Heritage Bifold", price: 2800, img: "https://images.unsplash.com/photo-1627384113743-6bd5a479fffd?auto=format&fit=crop&q=80&w=600&q=70", category: "Wallets", desc: "A tribute to classic Kenyan tanning techniques, this bifold ages beautifully, telling your story as it goes." },
-      { id: 7, name: "Sovereign Duffel", price: 14500, img: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=600&q=70", category: "Bags", desc: "The ultimate companion for the grand voyage. Spacious, robust, and undeniably regal." },
-      { id: 8, name: "Nocturnal Clutch", price: 5400, img: "https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&q=80&w=600&q=70", category: "Bags", desc: "Sleek and mysterious. Perfectly sized for evening essentials under the city lights." },
-      { id: 9, name: "Artisan Traverse Belt", price: 3800, img: "https://images.unsplash.com/photo-1624222247344-550fb8ec5522?auto=format&fit=crop&q=80&w=600&q=70", category: "Accessories", desc: "Double-layered grain leather with a hand-polished brass buckle. A silent statement of quality." },
-      { id: 10, name: "Diplomat Passport Sleeve", price: 2200, img: "https://images.unsplash.com/photo-1544333303-5775af6bb60e?auto=format&fit=crop&q=80&w=600&q=70", category: "Accessories", desc: "Protect your heritage. A slim, refined home for your most important travel documents." },
-      { id: 11, name: "Ancestral Keychain", price: 1200, img: "https://images.unsplash.com/photo-1582234033060-9377484a9ecb?auto=format&fit=crop&q=80&w=600&q=70", category: "Accessories", desc: "Small in size, grand in detail. A tactile reminder of the craftsmanship in your pocket." }
+<script>
+
+    // 1. UPDATED: Expanded product list with categories
+
+    const products = [
+
+        // WALLETS
+
+        { id: 1, name: "Signature Billfold", price: 2500, category: "wallets", img: "https://images.unsplash.com/photo-1627123424574-724758594e93" },
+
+        { id: 2, name: "Slim Card Sleeve", price: 1500, category: "wallets", img: "https://images.unsplash.com/photo-1559251643-c909e7445778?auto=format&fit=crop&w=800" },
+
+        { id: 3, name: "The Royal Clutch", price: 4200, category: "wallets", img: "https://images.unsplash.com/photo-1594223503110-38890259f81f?auto=format&fit=crop&w=800" },
+
+        
+
+        // HANDBAGS
+
+        { id: 4, name: "Atelier Tote", price: 6500, category: "handbags", img: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7" },
+
+        { id: 5, name: "Heritage Duffle", price: 8200, category: "handbags", img: "https://images.unsplash.com/photo-1544816155-12df9643f363" },
+
+        { id: 6, name: "Executive Briefcase", price: 12500, category: "handbags", img: "https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=800" },
+
+
+
+        // ACCESSORIES
+
+        { id: 7, name: "Classic Leather Belt", price: 2800, category: "accessories", img: "https://images.unsplash.com/photo-1624222247344-550fb8ec5521?auto=format&fit=crop&w=800" },
+
+        { id: 8, name: "Artisanal Key Ring", price: 950, category: "accessories", img: "https://images.unsplash.com/photo-1594913366249-184203ef3e1d?auto=format&fit=crop&w=800" },
+
+        { id: 9, name: "Luxury Watch Roll", price: 5500, category: "accessories", img: "https://images.unsplash.com/photo-1585123334904-845d60e97b29?auto=format&fit=crop&w=800" }
+
     ];
 
-    let currentCat = "All";
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let isAdminAuthenticated = false;
 
-    function save() {
-      localStorage.setItem("products", JSON.stringify(products));
-      localStorage.setItem("cart", JSON.stringify(cart));
-    }
 
-    function filterProducts(cat, el) {
-      currentCat = cat;
-      document.querySelectorAll('.category-bar span').forEach(s => s.classList.remove('active-cat'));
-      if (el) el.classList.add('active-cat');
-      render();
-    }
+    let cart = [];
 
-    function render() {
-      let html = "";
-      let filtered = currentCat === "All" ? products : products.filter(p => p.category === currentCat);
 
-      filtered.forEach(p => {
-        html += `
-  <div class="card">
-    <img src="${p.img}" onclick="openModal(${p.id})">
-    <div class="card-content">
-      <h3>${p.name}</h3>
-      <p>KES ${p.price}</p>
-      <button onclick="addToCart(${p.id})">Selection</button>
-    </div>
-  </div>`;
-      });
-      document.getElementById("products").innerHTML = html;
-      updateCart();
-      renderAdmin();
-      reveal();
-    }
 
-    /* THEME */
-    function toggleTheme() {
-      document.body.classList.toggle("night-mode");
-      showNotification(document.body.classList.contains("night-mode") ? "Dark Mode Active" : "Light Mode Active");
-    }
+    // 2. ADDED: Filter Functionality
 
-    /* CUSTOM COMMISSION */
-    function openCustom() {
-        document.getElementById("detail-modal").classList.add("custom-vibe");
-        document.getElementById("m-img").style.display = "none";
-        document.getElementById("m-name").innerText = "Custom Commission";
-        document.getElementById("m-desc").innerText = "Our master artisans are ready to create a unique leather masterpiece tailored to your exact desires. Please describe your vision.";
-        document.getElementById("m-cta").innerHTML = `
-            <textarea id="custom-wish" placeholder="Describe your masterpiece..." style="width:100%; padding:15px; border:1px solid var(--soft-border); background:transparent; font-family:inherit; min-height:100px; margin-bottom:20px; color:inherit;"></textarea>
-            <button onclick="whatsappCustom()">Begin Commission</button>
-        `;
-        document.getElementById("detail-modal").style.display = "flex";
-    }
+    function filterProducts(category, element) {
 
-    function whatsappCustom() {
-        const wish = document.getElementById("custom-wish").value;
-        if(!wish) return showNotification("Please share your vision first");
-        const msg = `Atelier Inquiry: Custom Commission Request\n\nVision: ${wish}\n\nI would like to begin the custom process for a unique Ruoth Luxury piece.`;
-        const encoded = encodeURIComponent(msg);
-        showNotification("Initiating Private Commission...");
+        // Update active button styling
+
+        document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+
+        element.classList.add('active');
+
+
+
+        const grid = document.getElementById('products');
+
+        
+
+        // Filter logic
+
+        const filtered = category === 'all' 
+
+            ? products 
+
+            : products.filter(p => p.category === category);
+
+
+
+        // Smooth transition effect
+
+        grid.style.opacity = '0';
+
         setTimeout(() => {
-            window.location.href = `https://api.whatsapp.com/send?phone=254725440406&text=${encoded}`;
-        }, 500);
+
+            grid.innerHTML = filtered.map(p => `
+
+                <div class="card">
+
+                    <img src="${p.img}">
+
+                    <h3 style="padding-top: 15px;">${p.name}</h3>
+
+                    <p>KES ${p.price.toLocaleString()}</p>
+
+                    <button class="btn-add" onclick="addToCart(${p.id})">Add to Collection</button>
+
+                </div>
+
+            `).join('');
+
+            grid.style.opacity = '1';
+
+        }, 300);
+
     }
 
-    function openModal(id) {
-      document.getElementById("detail-modal").classList.remove("custom-vibe");
-      document.getElementById("m-img").style.display = "block";
-      const p = products.find(x => x.id === id);
-      document.getElementById("m-img").src = p.img;
-      document.getElementById("m-name").innerText = p.name;
-      document.getElementById("m-desc").innerText = p.desc || "An exquisite piece of Kenyan craftsmanship, designed to last a generation.";
-      document.getElementById("m-cta").innerHTML = `<button onclick="addToCart(${p.id}); closeModal();">Add to Collection</button>`;
-      document.getElementById("detail-modal").style.display = "flex";
+
+
+    function renderProducts() {
+
+        document.getElementById('products').innerHTML = products.map(p => `
+
+            <div class="card">
+
+                <img src="${p.img}">
+
+                <h3 style="padding-top: 15px;">${p.name}</h3>
+
+                <p>KES ${p.price.toLocaleString()}</p>
+
+                <button class="btn-add" onclick="addToCart(${p.id})">Add to Collection</button>
+
+            </div>
+
+        `).join('');
+
     }
 
-    function closeModal() {
-      document.getElementById("detail-modal").style.display = "none";
-    }
 
-    function renderAdmin() {
-      let html = "";
-      products.forEach(p => {
-        html += `
-    <div class="admin-item">
-      <div class="admin-info">
-        <img src="${p.img}" class="admin-thumb">
-        <div class="admin-details">
-            <span class="admin-name">${p.name}</span>
-            <span class="admin-price">KES ${p.price}</span>
-        </div>
-      </div>
-      <button class="delete-btn" onclick="deleteProduct(${p.id})">Archive</button>
-    </div>`;
-      });
-      document.getElementById("adminList").innerHTML = html;
-    }
 
-    function deleteProduct(id) {
-      if (confirm("Are you sure you wish to archive this piece?")) {
-        products = products.filter(p => p.id !== id);
-        save(); render();
-        showNotification("Piece Archived");
-      }
-    }
-
-    /* SCROLL REVEAL */
-    function reveal() {
-      const cards = document.querySelectorAll(".card");
-      window.addEventListener("scroll", () => {
-        cards.forEach(c => {
-          const top = c.getBoundingClientRect().top;
-          if (top < window.innerHeight - 50) {
-            c.classList.add("show");
-          }
-        });
-      });
-    }
-
-    /* CART */
     function addToCart(id) {
-      cart.push(products.find(p => p.id === id));
-      save(); updateCart();
-      showNotification("Curated for your collection");
+
+        const item = products.find(p => p.id === id);
+
+        cart.push(item);
+
+        updateCartUI();
+
+        const btn = event.target;
+
+        btn.innerText = "Added!";
+
+        btn.style.background = "var(--gold)";
+
+        setTimeout(() => { btn.innerText = "Add to Collection"; btn.style.background = "var(--text)"; }, 800);
+
     }
 
-    function showNotification(msg) {
-      const notif = document.createElement("div");
-      notif.style.cssText = `
-    position: fixed;
-    bottom: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #2D3436;
-    color: white;
-    padding: 10px 40px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-size: 0.7rem;
-    z-index: 10000;
-    font-weight: 400;
-    animation: RevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  `;
-      notif.innerText = msg;
-      document.body.appendChild(notif);
-      setTimeout(() => {
-        notif.style.transition = "0.8s";
-        notif.style.opacity = "0";
-        setTimeout(() => notif.remove(), 800);
-      }, 2500);
+
+
+    function updateCartUI() {
+
+        const list = document.getElementById('cart-list');
+
+        const counter = document.getElementById('cart-counter');
+
+        const totalEl = document.getElementById('cart-total');
+
+        counter.innerText = `Bag (${cart.length})`;
+
+        list.innerHTML = cart.map((item, index) => `
+
+            <div class="cart-item">
+
+                <div><strong>${item.name}</strong><br><small>KES ${item.price.toLocaleString()}</small></div>
+
+                <i class="fas fa-trash-alt" onclick="removeItem(${index})" style="color:#cc0000; cursor:pointer;"></i>
+
+            </div>
+
+        `).join('');
+
+        const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+        totalEl.innerText = `Total: KES ${total.toLocaleString()}`;
+
     }
 
-    function updateCart() {
-      let total = 0, html = "";
-      cart.forEach((c, index) => {
-        total += c.price;
-        html += `
-  <div class="cart-item">
-    <span style="font-size:0.9rem;">${c.name}</span>
-    <span onclick="removeFromCart(${index})" class="remove-action">Remove</span>
-  </div>`;
-      });
-      document.getElementById("cartItems").innerHTML = html;
-      document.getElementById("total").innerText = total;
-      document.getElementById("count").innerText = cart.length;
-      document.getElementById("count-mobile").innerText = cart.length;
-    }
 
-    function toggleMenu() {
-      document.getElementById("nav-links").classList.toggle("active");
-      document.getElementById("sidebar-backdrop").classList.toggle("active");
-    }
 
-    function closeMenu() {
-      document.getElementById("nav-links").classList.remove("active");
-      document.getElementById("sidebar-backdrop").classList.remove("active");
-    }
+    function removeItem(index) { cart.splice(index, 1); updateCartUI(); }
 
-    function removeFromCart(index) {
-      cart.splice(index, 1);
-      save(); updateCart();
-      showNotification("Selection Removed");
-    }
+    
 
     function toggleCart() {
-      const cart = document.getElementById("cart");
-      const admin = document.getElementById("admin");
-      const backdrop = document.getElementById("sidebar-backdrop");
 
-      if (cart.classList.contains("active")) {
-        closeAllSidebars();
-      } else {
-        admin.classList.remove("active");
-        cart.classList.add("active");
-        backdrop.classList.add("active");
-      }
-    }
+        const sidebar = document.getElementById('cart-sidebar');
 
-    function loginAdmin() {
-      const emailInput = document.getElementById("admin-email");
-      const passInput = document.getElementById("admin-passcode");
-      
-      const email = emailInput.value;
-      const passcode = passInput.value;
+        sidebar.classList.toggle('active');
 
-      if (email === "admin@ruothluxury.com" && passcode === "RUOTH2026") {
-        isAdminAuthenticated = true;
-        document.getElementById("admin-login").style.display = "none";
-        document.getElementById("admin-tools").classList.add("visible");
-        showNotification("Access Granted, Atelier Master");
-      } else {
-        showNotification("Invalid Credentials");
-        passInput.value = "";
-      }
-    }
+        document.getElementById('overlay').style.display = sidebar.classList.contains('active') ? 'block' : 'none';
 
-    function toggleAdmin() {
-      const cart = document.getElementById("cart");
-      const admin = document.getElementById("admin");
-      const backdrop = document.getElementById("sidebar-backdrop");
-
-      if (admin.classList.contains("active")) {
-        closeAllSidebars();
-      } else {
-        cart.classList.remove("active");
-        admin.classList.add("active");
-        backdrop.classList.add("active");
-        
-        if (isAdminAuthenticated) {
-          document.getElementById("admin-login").style.display = "none";
-          document.getElementById("admin-tools").classList.add("visible");
-        } else {
-          document.getElementById("admin-login").style.display = "flex";
-          document.getElementById("admin-tools").classList.remove("visible");
-          // Clear fields for fresh login attempt
-          document.getElementById("admin-email").value = "";
-          document.getElementById("admin-passcode").value = "";
-        }
-      }
     }
 
 
-    function closeAllSidebars() {
-      document.getElementById("cart").classList.remove("active");
-      document.getElementById("admin").classList.remove("active");
-      document.getElementById("nav-links").classList.remove("active");
-      document.getElementById("sidebar-backdrop").classList.remove("active");
+
+    function toggleMpesa(show) { document.getElementById('mpesaModal').style.display = show ? 'flex' : 'none'; }
+
+    function processMpesa() { alert("STK Push sent!"); toggleMpesa(false); }
+
+    
+
+    function checkoutWA() {
+
+        const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+        let msg = `Hello Ruoth Luxury, I'd like to order:\n` + cart.map(i => `- ${i.name}`).join('\n') + `\nTotal: KES ${total}`;
+
+        window.open(`https://wa.me/254719568205?text=${encodeURIComponent(msg)}`);
+
     }
 
-    /* WHATSAPP */
-    /* WHATSAPP ORDERING */
-    /* WHATSAPP ORDERING */
-    function whatsapp() {
-      if (cart.length === 0) return showNotification("Your collection is empty");
 
-      let total = 0;
-      let itemList = "";
-      cart.forEach(item => {
-        total += item.price;
-        itemList += `- ${item.name} (KES ${item.price})\n`;
-      });
 
-      const message = `*Ruoth Luxury Atelier Order*\n\n` +
-        `I would like to place an order for the following pieces:\n` +
-        `${itemList}\n` +
-        `*Grand Total: KES ${total}*\n\n` +
-        `Please advise on the next steps. Thank you.`;
+    window.addEventListener("scroll", () => {
 
-      const encodedMsg = encodeURIComponent(message);
-      showNotification("Connecting to Atelier...");
+        document.getElementById("header").classList.toggle("scrolled", window.scrollY > 50);
 
-      // Using location.href to avoid popup blockers
-      setTimeout(() => {
-        window.location.href = `https://api.whatsapp.com/send?phone=254725440406&text=${encodedMsg}`;
-      }, 500);
-    }
+    });
 
-    /* M-PESA SIM */
-    function mpesaPay() {
-      alert("M-Pesa Prompt Sent 📲");
-    }
 
-    /* ADMIN */
-    async function addProduct() {
-      let name = pname.value, price = pprice.value, img = pimg.value, cat = pcat.value, desc = pdesc.value;
-      const file = pfile.files[0];
 
-      if (!name || !price) return showNotification("Please complete all fields");
+    renderProducts();
 
-      if (file) {
-        img = await new Promise((resolve) => {
-          const reader = new FileReader();
-          reader.onload = (e) => resolve(e.target.result);
-          reader.readAsDataURL(file);
-        });
-      }
 
-      if (!img) return showNotification("Please provide imagery or upload a file");
+    
+</script>
 
-      products.push({ id: Date.now(), name, price: Number(price), img, category: cat, desc });
-      save(); render();
-      showNotification("Piece Added to Collection");
-      pname.value = pprice.value = pimg.value = pdesc.value = pfile.value = "";
-    }
-
-    render();
-  </script>
-
-  <!-- PRODUCT MODAL -->
-  <div id="detail-modal">
-    <div class="modal-content">
-      <span class="close-modal" onclick="closeModal()">✕</span>
-      <img id="m-img" class="modal-img">
-      <div class="modal-info">
-        <h2 id="m-name"></h2>
-        <p id="m-desc"></p>
-        <div id="m-cta"></div>
-      </div>
-    </div>
-  </div>
+<a href="https://wa.me/254719568205?text=Hello%20Ruoth%20Luxury%2C%20I%20have%20an%20inquiry%20regarding..." 
+   class="whatsapp-float" 
+   target="_blank">
+    <i class="fab fa-whatsapp"></i>
+    <span class="wa-tooltip">Chat with an Artisan</span>
+</a>
 
 </body>
-
 </html>
