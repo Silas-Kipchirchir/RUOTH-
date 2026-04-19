@@ -569,12 +569,22 @@
     function toggleMpesa(show) { document.getElementById('mpesaModal').style.display = show ? 'flex' : 'none'; }
     function processMpesa() { alert("STK Push sent!"); toggleMpesa(false); }
 
-    function checkoutWA() {
-        const total = cart.reduce((sum, item) => sum + item.price, 0);
-        let msg = `Hello Ruoth Luxury, I'd like to order:\n` + cart.map(i => `- ${i.name}`).join('\n') + `\nTotal: KES ${total}`;
-        window.open(`https://wa.me/254719568205?text=${encodeURIComponent(msg)}`);
-    }
+  function checkoutWA() {
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
 
+    let msg = `🛍️ Hello Ruoth Luxury, I'd like to place an order:\n\n`;
+
+    cart.forEach((item, index) => {
+        msg += `${index + 1}. ${item.name}\n   Price: KES ${item.price.toLocaleString()}\n\n`;
+    });
+
+    msg += `━━━━━━━━━━━━━━\n`;
+    msg += `TOTAL: KES ${total.toLocaleString()}\n`;
+    msg += `━━━━━━━━━━━━━━\n\n`;
+    msg += `Please confirm availability.`;
+
+    window.open(`https://wa.me/254719568205?text=${encodeURIComponent(msg)}`);
+}
     window.addEventListener("scroll", () => {
         document.getElementById("header").classList.toggle("scrolled", window.scrollY > 50);
     });
