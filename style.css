@@ -1100,3 +1100,115 @@ footer {
   #detail-modal.custom-vibe .modal-info::before,
   #detail-modal.custom-vibe .modal-info::after { width: 40px; height: 40px; }
 }
+
+/* ================================
+   MOBILE FIX PATCH (DO NOT EDIT HTML)
+================================== */
+
+@media (max-width: 768px) {
+
+  /* Prevent horizontal scrolling issues */
+  html, body {
+    overflow-x: hidden;
+  }
+
+  /* Improve header layout spacing */
+  .header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* Make logo/title fit properly */
+  .logo-container h1 {
+    font-size: 1rem;
+  }
+
+  /* Hero better scaling */
+  .hero {
+    height: auto;
+    min-height: 65vh;
+    padding: 40px 15px;
+  }
+
+  .hero-box {
+    width: 100%;
+    padding: 30px 15px;
+  }
+
+  .hero h2 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+
+  /* Fix category scroll spacing */
+  .category-bar {
+    gap: 15px;
+    padding: 15px;
+  }
+
+  /* Force better grid spacing */
+  .grid {
+    grid-template-columns: 1fr !important;
+    padding: 20px 15px;
+    gap: 25px;
+  }
+
+  .card {
+    max-width: 100%;
+  }
+
+  .card img {
+    height: 240px;
+  }
+
+  /* Buttons easier to tap */
+  button {
+    width: 100%;
+    padding: 14px;
+    font-size: 0.75rem;
+  }
+
+  /* Sidebar full usability */
+  .cart, .admin {
+    width: 100vw !important;
+    right: -100vw;
+    padding: 25px 15px;
+  }
+
+  /* Modal fixes */
+  .modal-content {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .modal-img {
+    width: 100%;
+    height: 220px;
+  }
+
+  .modal-info {
+    width: 100%;
+    padding: 20px;
+  }
+
+  /* Newsletter input stacking fix */
+  .news-input {
+    flex-direction: column;
+  }
+
+  .news-input input {
+    border-right: 1px solid var(--soft-border);
+  }
+
+  /* Footer spacing fix */
+  .grand-footer {
+    text-align: left;
+    gap: 30px;
+  }
+
+  /* Make tap targets bigger */
+  .category-bar span,
+  .nav-links a {
+    font-size: 0.9rem;
+  }
+}
