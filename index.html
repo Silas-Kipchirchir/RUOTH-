@@ -273,7 +273,125 @@
         .cat-btn.active::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: var(--gold); }
 
         /* --- MOBILE WHATSAPP --- */
-        .whatsapp-float { position: fixed; bottom: 40px; right: 40px; width: 60px; height: 60px; background: #25D366; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 5000; box-shadow: 0 10px 25px rgba(0,0,0,0.2); text-decoration: none; transition: 0.3s; }
+        .whatsapp-float {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 65px;
+    height: 65px;
+    background: linear-gradient(135deg, #25D366, #1ebe5d);
+    color: #fff;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+    z-index: 5000;
+
+    text-decoration: none;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ICON */
+.whatsapp-float i {
+    position: relative;
+    z-index: 3;
+}
+
+/* ✨ OUTER PULSE RING */
+.whatsapp-float::before {
+  content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+
+    border: 2.5px solid rgba(37, 211, 102, 0.6);
+
+    animation: uniformPulse 2.4s infinite ease-out;
+}
+
+/* second ring delay only */
+.whatsapp-float::after {
+    animation-delay: 1.2s;
+}
+
+.whatsapp-float::after {
+  content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+
+    border: 2.5px solid rgba(37, 211, 102, 0.6);
+
+    animation: uniformPulse 2.4s infinite ease-out;
+}
+
+/* second ring delay only */
+.whatsapp-float::after {
+    animation-delay: 1.2s;
+}
+
+/* KEYFRAMES */
+@keyframes uniformPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    70% {
+        transform: scale(1.9);
+        opacity: 0.1;
+    }
+    100% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
+}
+
+/* HOVER LUXURY EFFECT */
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 20px 50px rgba(37, 211, 102, 0.6);
+}
+
+/* ✨ SECOND SOFTER GLOW LAYER */
+.whatsapp-float::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(37, 211, 102, 0.2);
+    z-index: 1;
+
+    animation: pulseRing 2.2s infinite ease-out;
+    animation-delay: 1.1s;
+}
+
+/* HOVER (subtle luxury lift) */
+.whatsapp-float:hover {
+    transform: scale(1.08);
+    box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5);
+}
+
+/* KEYFRAMES */
+@keyframes pulseRing {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+    70% {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
 
         /* ================= MOBILE RESPONSIVE FIXES ================= */
         @media (max-width: 968px) {
@@ -348,6 +466,19 @@
     box-shadow: 0 10px 25px rgba(184,134,11,0.3);
 }
 
+.whatsapp-float {
+    text-decoration: none;   /* removes underline */
+}
+
+.whatsapp-float i {
+    line-height: 1;          /* prevents extra baseline spacing */
+}
+
+.whatsapp-float {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
     </style>
 </head>
@@ -466,6 +597,9 @@
     </div>
     <div class="cart-items" id="cart-list"></div>
     <div class="cart-total" id="cart-total">Total: KES 0</div>
+
+        
+
     <div class="checkout-actions">
         <button class="btn-wa" onclick="checkoutWA()"><i class="fab fa-whatsapp"></i> WhatsApp Checkout</button>
         <button class="btn-mpesa-checkout" onclick="toggleMpesa(true)">M-Pesa Checkout</button>
@@ -526,26 +660,48 @@
     }
 
     function addToCart(id) {
-        const item = products.find(p => p.id === id);
-        cart.push(item);
-        updateCartUI();
-        const btn = event.target;
-        btn.innerText = "Added!";
-        setTimeout(() => btn.innerText = "Add to Collection", 1000);
+    const item = products.find(p => p.id === id);
+
+    let existing = cart.find(c => c.id === id);
+
+    if (existing) {
+        existing.qty += 1;
+    } else {
+        cart.push({ ...item, qty: 1 });
     }
+
+    updateCartUI();
+
+    const btn = event.target;
+    btn.innerText = "Added!";
+    setTimeout(() => btn.innerText = "Add to Collection", 800);
+}
 
     function updateCartUI() {
         const list = document.getElementById('cart-list');
         const countNav = document.getElementById('cart-count-nav');
         const totalEl = document.getElementById('cart-total');
         countNav.innerText = `(${cart.length})`;
-        list.innerHTML = cart.map((item, index) => `
-            <div class="cart-item">
-                <div><strong>${item.name}</strong><br><small>KES ${item.price.toLocaleString()}</small></div>
-                <i class="fas fa-trash-alt" onclick="removeItem(${index})" style="color:#cc0000; cursor:pointer;"></i>
-            </div>
-        `).join('');
-        const total = cart.reduce((sum, item) => sum + item.price, 0);
+      list.innerHTML = cart.map((item, index) => `
+    <div class="cart-item">
+        <div>
+            <strong>${item.name}</strong><br>
+
+            <small>
+                KES ${item.price.toLocaleString()} × ${item.qty}
+                = <b>KES ${(item.price * item.qty).toLocaleString()}</b>
+            </small>
+        </div>
+
+        <div style="display:flex; gap:10px; align-items:center;">
+            <button onclick="decreaseQty(${index})" style="padding:3px 8px;">-</button>
+            <span>${item.qty}</span>
+            <button onclick="increaseQty(${index})" style="padding:3px 8px;">+</button>
+            <i class="fas fa-trash-alt" onclick="removeItem(${index})" style="margin-left:10px; color:#cc0000; cursor:pointer;"></i>
+        </div>
+    </div>
+`).join('');
+        const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
         totalEl.innerText = `Total: KES ${total.toLocaleString()}`;
     }
 
@@ -590,7 +746,118 @@
     });
 
     renderProducts();
+
+
+function increaseQty(index) {
+    cart[index].qty += 1;
+    updateCartUI();
+}
+
+function decreaseQty(index) {
+    cart[index].qty -= 1;
+
+    if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+    }
+
+    updateCartUI();
+}
+
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.from(".hero-box", {
+    opacity: 0,
+    y: 60,
+    duration: 1.5,
+    ease: "power4.out"
+});
+
+gsap.from(".hero h2", {
+    opacity: 0,
+    y: 40,
+    delay: 0.3,
+    duration: 1.2,
+    ease: "power3.out"
+});
+
+gsap.from(".hero p", {
+    opacity: 0,
+    y: 20,
+    delay: 0.5,
+    duration: 1
+});
+
+gsap.from(".card", {
+    scrollTrigger: {
+        trigger: ".grid",
+        start: "top 80%"
+    },
+    opacity: 0,
+    y: 50,
+    scale: 0.95,
+    duration: 1,
+    stagger: 0.15,
+    ease: "power3.out"
+});
+
+gsap.from(".main-heritage-img", {
+    scrollTrigger: {
+        trigger: ".heritage-wrapper",
+        start: "top 80%"
+    },
+    x: -100,
+    opacity: 0,
+    duration: 1.2,
+    ease: "power3.out"
+});
+
+gsap.from(".heritage-content", {
+    scrollTrigger: {
+        trigger: ".heritage-wrapper",
+        start: "top 80%"
+    },
+    x: 100,
+    opacity: 0,
+    duration: 1.2,
+    ease: "power3.out"
+});
+
+gsap.from(".feature-card", {
+    scrollTrigger: {
+        trigger: ".features-section-dark",
+        start: "top 80%"
+    },
+    opacity: 0,
+    y: 60,
+    duration: 1,
+    stagger: 0.2,
+    ease: "power4.out"
+});
+
+gsap.to(".header", {
+    scrollTrigger: {
+        trigger: "body",
+        start: "top top",
+        scrub: true
+    },
+    backgroundColor: "rgba(255,255,255,0.85)",
+    backdropFilter: "blur(20px)"
+});
+
+
+
+gsap.from(".category-list", {
+    opacity: 0,
+    y: 30,
+    duration: 1,
+    ease: "power3.out"
+});
+
+
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
 </body>
 </html>
